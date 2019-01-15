@@ -6,6 +6,7 @@ import { SearchComponent } from './search/search.component';
 import { EventsListComponent } from './events-list/events-list.component';
 import { EventComponent } from './event/event.component';
 import { FiltersComponent } from './filters/filters.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { FiltersComponent } from './filters/filters.component';
     FiltersComponent
   ],
   imports: [
+    CommonModule,
     DashboardRoutingModule
   ]
 })
