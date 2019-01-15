@@ -1,11 +1,12 @@
 <div class="filters">
   <div class="ui container">
     
+    <!--<span class="filter-label">City</span>-->
     <div class="filters__city">
       <button *ngFor="let city of cities" class="ui button circular">{{city.name}}</button>
     </div>
     
-    
+    <!--<span class="filter-label">Event type</span>-->
     <div class="filters__event-type">
       <button *ngFor="let eventType of events"
               class="ui button circular icon"
