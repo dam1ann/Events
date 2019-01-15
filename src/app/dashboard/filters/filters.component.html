@@ -5,10 +5,14 @@
       <button *ngFor="let city of cities" class="ui button circular">{{city.name}}</button>
     </div>
     
+    
     <div class="filters__event-type">
       <button *ngFor="let eventType of events"
               class="ui button circular icon"
-              [ngClass]="eventType.color">
+              [ngClass]="eventType.color"
+              popupText="{{eventType.name}}"
+              popupPlacement="bottom"
+              suiPopup>
         <i class="icon" [ngClass]="eventType.icon"></i>
       </button>
     </div>

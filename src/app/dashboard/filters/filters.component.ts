@@ -1,5 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 
+const cities: Array<Object> = [
+  {
+    name: 'Warsaw'
+  }, {
+    name: 'Wroclaw'
+  }, {
+    name: 'Cracow'
+  }, {
+    name: 'Gdansk'
+  }, {
+    name: 'Poznan'
+  }, {
+    name: 'Bialystok'
+  }, {
+    name: 'Siedlce'
+  }, {
+    name: 'London'
+  }
+];
+
 const events: Array<Object> = [
   {
     name: 'Music',
@@ -36,29 +56,10 @@ const events: Array<Object> = [
   }, {
     name: 'Cakes',
     color: 'purple',
-    icon: 'cake'
+    icon: 'gamepad'
   }
 ];
 
-const cities: Array<Object> = [
-  {
-    name: 'Warsaw'
-  }, {
-    name: 'Wroclaw'
-  }, {
-    name: 'Cracow'
-  }, {
-    name: 'Gdansk'
-  }, {
-    name: 'Poznan'
-  }, {
-    name: 'Bialystok'
-  }, {
-    name: 'Siedlce'
-  }, {
-    name: 'London'
-  }
-];
 
 @Component({
   selector: 'app-filters',
