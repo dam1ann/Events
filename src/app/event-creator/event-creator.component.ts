@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-event-creator',
-  templateUrl: './event-creator.component.html',
-  styleUrls: ['./event-creator.component.scss']
+    selector: 'app-event-creator',
+    templateUrl: './event-creator.component.html',
+    styleUrls: ['./event-creator.component.scss']
 })
 export class EventCreatorComponent implements OnInit {
 
-  constructor() { }
+    activeStep: number;
 
-  ngOnInit() {
-  }
+    constructor() {
+    }
+
+    ngOnInit() {
+        this.activeStep = 1;
+    }
 
 }
