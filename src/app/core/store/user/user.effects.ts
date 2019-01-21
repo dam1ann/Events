@@ -22,7 +22,7 @@ export class UserEffects {
     ofType(userActions.GET_USER),
     map((action: userActions.GetUser) => action.payload),
     switchMap(payload => this.afAuth.authState),
-    delay(2000),
+    // delay(2000),
     map(authData => {
       if (authData) {
         const user = new User(authData.uid, authData.displayName);

@@ -36,14 +36,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = this.userStore.select('user')
-      .pipe(
-        tap(user => {
-          if (user.uid) {
-            this.modal.destroy();
-          }
-        }));
-
-    this.userStore.dispatch(new userActions.GetUser());
+      .pipe(tap(user => {
+        if (user.uid) {
+          this.modal.destroy();
+        }
+      }));
   }
 
   loginGoogle() {

@@ -6,34 +6,31 @@
     <a class="item">
       <i class="grid layout icon"></i> Browse
     </a>
-    <a class="item" (click)="login()">
-      <ng-container *ngIf="user$ | async as user; else notLogged">
-        {{user.displayName}}
-        <!--<i class="grid layout icon"></i> Logout-->
-      </ng-container>
-      <ng-template #notLogged>
-        <i class="grid layout icon"></i> Login
-      </ng-template>
-    </a>
-    <a class="item" (click)="logout()">
-      <i class="calendar plus outline icon blue"></i> Logout
-    </a>
     <a class="item" routerLink="/create">
       <i class="calendar plus outline icon blue"></i> Add event
     </a>
     
     <div class="right item">
       <app-search></app-search>
-      <div class="ui simple dropdown item">
-        More
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          <a class="item" routerLink="/account"><i class="edit icon"></i> Profile</a>
-          <a class="item"><i class="globe icon"></i> Choose Language</a>
-          <a class="item"><i class="settings icon"></i> Account Settings</a>
-          <a class="item"><i class="logout icon"></i> Logout</a>
+      <ng-container *ngIf="(user$ | async)?.uid; else notLoggedIn">
+        <div class="ui simple dropdown item">
+          More
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a class="item" routerLink="/account"><i class="user icon"></i> Profile</a>
+            <a class="item"><i class="globe icon"></i> Choose Language</a>
+            <a class="item"><i class="settings icon"></i> Account Settings</a>
+            <a class="item" (click)="logout()"><i class="logout icon"></i> Logout</a>
+          </div>
         </div>
-      </div>
+      </ng-container>
+      <ng-template #notLoggedIn>
+        <app-login #loginModal></app-login>
+        <a class="item" (click)="loginModal.open()">
+          Login
+        </a>
+
+      </ng-template>
     </div>
   </div>
 </div>
