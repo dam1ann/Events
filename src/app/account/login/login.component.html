@@ -3,10 +3,11 @@
   <div class="content">
    <div class="ui section padded">
      <div class="ui basic fluid segment">
-    
-       <div class="ui hidden divider"></div>
-    
-       <button class="ui basic fluid button">
+      
+       
+       <button class="ui primary fluid button"
+               [class.loading]="(user$|async)?.loading"
+               (click)="loginGoogle()">
          <i class="google icon"></i>
          Google login
        </button>
@@ -14,7 +15,7 @@
        <div class="ui hidden divider"></div>
     
     
-       <button class="ui basic fluid button">
+       <button class="ui basic disabled fluid button">
          <i class="facebook f icon"></i>
          Facebook login
        </button>
@@ -23,7 +24,7 @@
      <div class="ui divider"></div>
      
      <div class="ui basic fluid segment">
-       <form class="ui form">
+       <form class="ui form centered">
          <div class="field">
            <label>First Name</label>
            <input type="text" name="first-name" placeholder="First Name">
@@ -32,16 +33,15 @@
            <label>Last Name</label>
            <input type="text" name="last-name" placeholder="Last Name">
          </div>
-         <button class="ui button" type="submit">Submit</button>
+         <button class="ui positive button submit-button" type="submit">Submit</button>
        </form>
      </div>
      
-     <div class="ui divider"></div>
-     
-     <div class="ui basic fluid segment">
-       <p>Not have an account? </p>
-       
-     </div>
+     <!--<div class="ui basic fluid segment">-->
+       <!--<p>Not have an account? </p>-->
+       <!--<a >Create new account</a>-->
+       <!---->
+     <!--</div>-->
      
    </div>
    
