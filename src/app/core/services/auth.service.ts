@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CoreModule } from '../core.module';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
-import { Observable } from 'rxjs';
 
 
 @Injectable({

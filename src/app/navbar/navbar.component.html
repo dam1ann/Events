@@ -7,12 +7,21 @@
       <i class="grid layout icon"></i> Browse
     </a>
     <a class="item" (click)="login()">
-      <i class="grid layout icon"></i> Login
+      <ng-container *ngIf="user$ | async as user; else notLogged">
+        {{user.displayName}}
+        <!--<i class="grid layout icon"></i> Logout-->
+      </ng-container>
+      <ng-template #notLogged>
+        <i class="grid layout icon"></i> Login
+      </ng-template>
+    </a>
+    <a class="item" (click)="logout()">
+      <i class="calendar plus outline icon blue"></i> Logout
     </a>
     <a class="item" routerLink="/create">
       <i class="calendar plus outline icon blue"></i> Add event
     </a>
-   
+    
     <div class="right item">
       <app-search></app-search>
       <div class="ui simple dropdown item">

@@ -21,7 +21,7 @@ export function userReducer(state: User = defaultUser, action: Action) {
       return {...state, loading: true};
 
     case userActions.AUTH_ERROR:
-      return {...state, ...action.payload, loading: true};
+      return {...state, ...action.payload, loading: false};
 
     case userActions.LOGOUT:
       return {...state, loading: true};

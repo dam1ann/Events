@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 
@@ -7,15 +6,27 @@ import { environment } from '../../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './store/user/user.effects';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './store/user/user.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 
 @NgModule({
   imports: [
-    // CommonModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    EffectsModule.forRoot([UserEffects]),
+    StoreModule.forRoot({
+      user: userReducer
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    })
   ],
   declarations: [],
   providers: []

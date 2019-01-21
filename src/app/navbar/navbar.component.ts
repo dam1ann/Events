@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../core/services/auth.service';
+import { Observable } from 'rxjs';
+import { User } from '../core/models/user.interface';
+import { Store } from '@ngrx/store';
+
+import * as userActions from '../core/store/user/user.actions';
+
+interface AppState {
+  user: User;
+}
+
 
 @Component({
   selector: 'app-navbar',
@@ -8,21 +17,22 @@ import { AuthService } from '../core/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService) {
+  user$: Observable<User>;
+
+  constructor(private userStore: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.authService.user.subscribe(data =>{
-      console.log(data);
-    })
+    this.user$ = this.userStore.select('user');
+    this.userStore.dispatch(new userActions.GetUser());
   }
 
-  async login() {
-    await this.authService.login();
+  login() {
+    this.userStore.dispatch(new userActions.GoogleLogin());
   }
 
-  async logout() {
-    await this.authService.logout();
+  logout() {
+    this.userStore.dispatch(new userActions.Logout());
   }
 
 }
