@@ -4,7 +4,7 @@
   <div class="ui container">
     <img class="ui small circular image centered" src="../../assets/images/square-image.png" alt="">
     
-    <h1 class="account__author-name">Janusz Kowalski</h1>
+    <h1 class="account__author-name">{{(user$ | async)?.displayName}}</h1>
     
     <div class="ui three item secondary menu">
       <a class="active item">Events</a>

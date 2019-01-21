@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   private modalTemplate: ModalTemplate<IContext, string, string>;
   private modal: ActiveModal<any, any, any>;
 
-  constructor(public modalService: SuiModalService,
+  constructor(private modalService: SuiModalService,
               private userStore: Store<AppState>) {
 
   }

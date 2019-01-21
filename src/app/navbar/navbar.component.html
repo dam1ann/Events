@@ -14,12 +14,12 @@
       <app-search></app-search>
       <ng-container *ngIf="(user$ | async)?.uid; else notLoggedIn">
         <div class="ui simple dropdown item">
-          More
+          {{(user$ | async)?.displayName}}
           <i class="dropdown icon"></i>
           <div class="menu">
             <a class="item" routerLink="/account"><i class="user icon"></i> Profile</a>
-            <a class="item"><i class="globe icon"></i> Choose Language</a>
-            <a class="item"><i class="settings icon"></i> Account Settings</a>
+            <!--<a class="item"><i class="globe icon"></i> Choose Language</a>-->
+            <a class="item" routerLink="/settings"><i class="settings icon"></i> Account Settings</a>
             <a class="item" (click)="logout()"><i class="logout icon"></i> Logout</a>
           </div>
         </div>
