@@ -33,9 +33,13 @@ export class EventCreatorComponent implements OnInit {
   open(dynamicContent: string = '') {
     const config = new TemplateModalConfig(this.modalTemplate);
 
-    config.size = 'mini';
+    // config.isClosable = false;
+    // config.transitionDuration = 200;
+    config.isBasic = true;
+    config.size = 'normal';
 
     this.modal = this.modalService.open(config);
+
   }
 
 }

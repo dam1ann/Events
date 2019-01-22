@@ -4,8 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './dashboard/dashboard.module#DashboardModule',
-    data: {preload: true, delay: true}
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
   }, {
     path: 'event',
     loadChildren: './event/event.module#EventModule'
@@ -15,8 +14,12 @@ const routes: Routes = [
   }, {
     path: 'settings',
     loadChildren: './settings/settings.module#SettingsModule'
+  }, {
+    path: 'create',
+    loadChildren: './event-creator/event-creator.module#EventCreatorModule'
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {

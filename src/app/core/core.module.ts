@@ -11,6 +11,8 @@ import { UserEffects } from './store/user/user.effects';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/user/user.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { eventCreatorReducer } from './store/event-creator/event-creator.reducer';
+import { EventCreatorEffects } from './store/event-creator/event-creator.effects';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot({
       user: userReducer
     }),
+    EffectsModule.forFeature([EventCreatorEffects]),
+    StoreModule.forFeature('event-creator', eventCreatorReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     })

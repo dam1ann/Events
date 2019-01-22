@@ -1,6 +1,6 @@
 import * as userActions from './user.actions';
 import { from, Observable, of } from 'rxjs';
-import { catchError, delay, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -36,11 +36,20 @@ export class UserEffects {
 
 
   @Effect()
-  login: Observable<Action> = this.actions.pipe(
+  googleLogin: Observable<Action> = this.actions.pipe(
     ofType(userActions.GOOGLE_LOGIN),
     map((action: userActions.GoogleLogin) => action.payload),
-    switchMap(payload => from(this.googleLogin())),
+    switchMap(payload => from(this._googleLogin())),
     // successful login
+    map(credential => new userActions.GetUser()),
+    catchError(err => of(new userActions.AuthError({error: err.message})))
+  );
+
+
+  facebookLogin: Observable<Action> = this.actions.pipe(
+    ofType(userActions.FACEBOOK_LOGIN),
+    map((action: userActions.FacebookLogin) => action.payload),
+    switchMap(payload => from(this._facebookLogin())),
     map(credential => new userActions.GetUser()),
     catchError(err => of(new userActions.AuthError({error: err.message})))
   );
@@ -56,8 +65,13 @@ export class UserEffects {
   );
 
 
-  private googleLogin(): Promise<any> {
+  private _googleLogin(): Promise<any> {
     const provider = new firebase.auth.GoogleAuthProvider();
     return this.afAuth.auth.signInWithPopup(provider);
+  }
+
+  private _facebookLogin(): Promise<any> {
+    const provier = new firebase.auth.FacebookAuthProvider();
+    return this.afAuth.auth.signInWithPopup(provier);
   }
 }

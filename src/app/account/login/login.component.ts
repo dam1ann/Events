@@ -48,6 +48,10 @@ export class LoginComponent implements OnInit {
     this.userStore.dispatch(new userActions.GoogleLogin());
   }
 
+  loginFacebook() {
+    this.userStore.dispatch(new userActions.FacebookLogin());
+  }
+
 
   open(dynamicContent: string = '') {
     const config = new TemplateModalConfig(this.modalTemplate);

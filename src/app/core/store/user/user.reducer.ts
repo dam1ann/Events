@@ -3,7 +3,7 @@ import * as userActions from './user.actions';
 
 export type Action = userActions.All;
 
-const defaultUser = new User(null, 'GUEST');
+const defaultUser = new User(null, 'Guest');
 
 export function userReducer(state: User = defaultUser, action: Action) {
   switch (action.type) {
@@ -16,6 +16,9 @@ export function userReducer(state: User = defaultUser, action: Action) {
 
     case userActions.NOT_AUTHENTICATED:
       return {...state, ...defaultUser, loading: false};
+
+    case userActions.FACEBOOK_LOGIN:
+      return {...state, loading: true};
 
     case userActions.GOOGLE_LOGIN:
       return {...state, loading: true};

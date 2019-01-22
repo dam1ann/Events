@@ -5,6 +5,8 @@ export const GET_USER = '[Auth] Get user';
 export const AUTHENTICATED = '[Auth] Authenticated';
 export const NOT_AUTHENTICATED = '[Auth] Not Authenticated';
 export const GOOGLE_LOGIN = '[Auth] Google login attempt';
+export const FACEBOOK_LOGIN = '[Auth] Facebook login attempt';
+export const EMAIL_LOGIN = '[Auth] Email login attempt';
 export const LOGOUT = '[Auth] Logout';
 export const AUTH_ERROR = '[Auth] Error';
 
@@ -47,6 +49,25 @@ export class GoogleLogin implements Action {
   }
 }
 
+
+// Facebook Login Actions
+export class FacebookLogin implements Action {
+  readonly type = FACEBOOK_LOGIN;
+
+  constructor(public payload?: any) {
+  }
+}
+
+
+export class EmailLogin implements Action {
+  readonly type = EMAIL_LOGIN;
+
+  constructor(public payload?: any) {
+
+  }
+}
+
+
 /// Logout Actions
 
 export class Logout implements Action {
@@ -56,4 +77,4 @@ export class Logout implements Action {
   }
 }
 
-export type All = GetUser | Authenticated | NotAuthenticated | GoogleLogin | AuthError | Logout;
+export type All = GetUser | Authenticated | NotAuthenticated | GoogleLogin | FacebookLogin | AuthError | Logout;

@@ -29,7 +29,6 @@ export class NavbarComponent implements OnInit {
   }
 
   login() {
-    console.log('test');
     this.userStore.dispatch(new userActions.GoogleLogin());
   }
 
