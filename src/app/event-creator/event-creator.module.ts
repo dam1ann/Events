@@ -5,12 +5,23 @@ import { EventCreatorRoutingModule } from './event-creator-routing.module';
 import { FirstStepComponent } from './first-step/first-step.component';
 import { SecondStepComponent } from './second-step/second-step.component';
 import { ThirdStepComponent } from './third-step/third-step.component';
+import { SuiModalModule } from 'ng2-semantic-ui';
 
 @NgModule({
-  declarations: [EventCreatorComponent, FirstStepComponent, SecondStepComponent, ThirdStepComponent],
+  declarations: [
+    EventCreatorComponent,
+    FirstStepComponent,
+    SecondStepComponent,
+    ThirdStepComponent
+  ],
   imports: [
     CommonModule,
+    SuiModalModule,
     EventCreatorRoutingModule,
+  ],
+  exports: [
+    EventCreatorComponent
   ]
 })
-export class EventCreatorModule { }
+export class EventCreatorModule {
+}

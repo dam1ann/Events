@@ -15,9 +15,6 @@ const routes: Routes = [
   }, {
     path: 'settings',
     loadChildren: './settings/settings.module#SettingsModule'
-  }, {
-    path: 'create',
-    loadChildren: './event-creator/event-creator.module#EventCreatorModule'
   }
 ];
 

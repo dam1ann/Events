@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { ModalTemplate, SuiModalService, TemplateModalConfig } from 'ng2-semantic-ui';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -19,7 +19,8 @@ interface AppState {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
 

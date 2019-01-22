@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 const user = {
   name: 'Janusz',
@@ -26,7 +26,8 @@ const events = [
 @Component({
   selector: 'app-events-list',
   templateUrl: './events-list.component.html',
-  styleUrls: ['./events-list.component.scss']
+  styleUrls: ['./events-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventsListComponent implements OnInit {
 

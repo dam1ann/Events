@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { User } from '../core/models/user.interface';
 import { Observable } from 'rxjs';
@@ -10,7 +10,8 @@ interface AppState {
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  styleUrls: ['./account.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccountComponent implements OnInit {
 

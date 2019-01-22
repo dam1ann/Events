@@ -1,3 +1,7 @@
+<app-login #loginModal></app-login>
+<app-event-creator #createModal></app-event-creator>
+
+
 <div class="ui secondary attached stackable menu">
   <div class="ui container">
     <a class="item" routerLink="/">
@@ -6,9 +10,17 @@
     <a class="item">
       <i class="grid layout icon"></i> Browse
     </a>
-    <a class="item" routerLink="/create">
-      <i class="calendar plus outline icon blue"></i> Add event
-    </a>
+    
+    <ng-container *ngIf="(user$ | async)?.uid; else createNotLoggedIn">
+      <a class="item" (click)="createModal.open()">
+        <i class="calendar plus outline icon blue"></i> Add event
+      </a>
+    </ng-container>
+    <ng-template #createNotLoggedIn>
+      <a class="item" (click)="loginModal.open()">
+        <i class="calendar plus outline icon blue"></i> Add event
+      </a>
+    </ng-template>
     
     <div class="right item">
       <app-search></app-search>
@@ -25,7 +37,6 @@
         </div>
       </ng-container>
       <ng-template #notLoggedIn>
-        <app-login #loginModal></app-login>
         <a class="item" (click)="loginModal.open()">
           Login
         </a>

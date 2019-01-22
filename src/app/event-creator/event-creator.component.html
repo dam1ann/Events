@@ -1,48 +1,59 @@
-<div class="event-creator">
-	<div class="ui container">
-		<div class="ui grid">
-			<div class="five wide column">
-				<div class="ui fluid card">
-					<div class="ui vertical fluid steps">
-						<div class="step"
-							 routerLink="/create/first"
-							 [ngClass]="activeStep == '1' ? 'active' : ''"
-							 (click)="activeStep = 1">
-							<div class="content">
-								<div class="title">Overall</div>
-								<div class="description">Type your event name and options</div>
-							</div>
-						</div>
-						<div class="step"
-							 routerLink="/create/second"
-							 [ngClass]="activeStep == '2' ? 'active' : ''"
-							 (click)="activeStep = 2">
-							<div class="content">
-								<div class="title">Event type</div>
-								<div class="description">Enter event type information</div>
-							</div>
-						</div>
-						<div class="step"
-							 routerLink="/create/third"
-							 [ngClass]="activeStep == '3' ? 'active' : ''"
-							 (click)="activeStep = 3">
-							<div class="content">
-								<div class="title">Confirm information</div>
-								<div class="description">Verify event details</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="eleven wide column ">
-				<div class="ui segment">
-					<router-outlet></router-outlet>
-				</div>
-				<!--<div class="ui fluid card">-->
-				<!--<div class="content card-content">-->
-				<!--</div>-->
-				<!--</div>-->
-			</div>
-		</div>
-	</div>
-</div>
+<!--<div class="event-creator">-->
+  <!--<div class="ui container">-->
+    <!--<div class="ui grid">-->
+      <!--<div class="five wide column">-->
+        <!--<div class="ui fluid card">-->
+          <!--<div class="ui vertical fluid steps">-->
+            <!--<div class="step"-->
+                 <!--routerLink="/create/first"-->
+                 <!--[ngClass]="activeStep == '1' ? 'active' : ''"-->
+                 <!--(click)="activeStep = 1">-->
+              <!--<div class="content">-->
+                <!--<div class="title">Overall</div>-->
+                <!--<div class="description">Type your event name and options</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="step"-->
+                 <!--routerLink="/create/second"-->
+                 <!--[ngClass]="activeStep == '2' ? 'active' : ''"-->
+                 <!--(click)="activeStep = 2">-->
+              <!--<div class="content">-->
+                <!--<div class="title">Event type</div>-->
+                <!--<div class="description">Enter event type information</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="step"-->
+                 <!--routerLink="/create/third"-->
+                 <!--[ngClass]="activeStep == '3' ? 'active' : ''"-->
+                 <!--(click)="activeStep = 3">-->
+              <!--<div class="content">-->
+                <!--<div class="title">Confirm information</div>-->
+                <!--<div class="description">Verify event details</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="eleven wide column ">-->
+        <!--<div class="ui segment">-->
+          <!--<router-outlet></router-outlet>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div class="ui fluid card">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="content card-content">&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<ng-template let-context let-modal="modal" #modalTemplate>
+  <div class="header">Add new</div>
+  <div class="content">
+    <div class="ui section padded">
+      <div class="ui basic fluid segment">
+        create event
+      </div>
+    </div>
+  </div>
+</ng-template>
