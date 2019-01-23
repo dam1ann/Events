@@ -1,45 +1,55 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
-import { ModalTemplate, SuiModalService, TemplateModalConfig } from 'ng2-semantic-ui';
-import { ActiveModal } from 'ng2-semantic-ui/dist';
+import {AfterViewChecked, ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
+import {ModalTemplate, SuiModalService, TemplateModalConfig} from 'ng2-semantic-ui';
+import {ActiveModal} from 'ng2-semantic-ui/dist';
 
 
 interface IContext {
-  data: string;
+    data: string;
 }
 
-
 @Component({
-  selector: 'app-event-creator',
-  templateUrl: './event-creator.component.html',
-  styleUrls: ['./event-creator.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-event-creator',
+    templateUrl: './event-creator.component.html',
+    styleUrls: ['./event-creator.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventCreatorComponent implements OnInit {
+export class EventCreatorComponent implements OnInit, AfterViewChecked {
 
-  activeStep: number;
+    activeStep: number;
 
-  @ViewChild('modalTemplate')
-  private modalTemplate: ModalTemplate<IContext, string, string>;
-  private modal: ActiveModal<any, any, any>;
+    @ViewChild('modalTemplate')
+    private modalTemplate: ModalTemplate<IContext, string, string>;
+    private modal: ActiveModal<any, any, any>;
 
-  constructor(private modalService: SuiModalService) {
-  }
+    constructor(private modalService: SuiModalService) {
+    }
 
-  ngOnInit() {
-    this.activeStep = 1;
-  }
+    ngOnInit() {
+    }
 
 
-  open(dynamicContent: string = '') {
-    const config = new TemplateModalConfig(this.modalTemplate);
+    ngAfterViewChecked(): void {
 
-    // config.isClosable = false;
-    // config.transitionDuration = 200;
-    config.isBasic = true;
-    config.size = 'normal';
+        setTimeout(() => {
+            this.open();
+            this.modal.onDeny(this._denyModal);
+        }, 0);
 
-    this.modal = this.modalService.open(config);
+    }
 
-  }
+    open(dynamicContent: string = '') {
+        const config = new TemplateModalConfig(this.modalTemplate);
+
+        config.isBasic = true;
+        config.size = 'normal';
+
+        this.modal = this.modalService.open(config);
+    }
+
+
+    private _denyModal() {
+        console.log('test');
+    }
+
 
 }

@@ -16,15 +16,15 @@ const routes: Routes = [
         redirectTo: 'first'
       },
       {
-        path: 'name',
+        path: 'first',
         component: FirstStepComponent
       },
       {
-        path: 'more',
+        path: 'second',
         component: SecondStepComponent
       },
       {
-        path: 'categories',
+        path: 'third',
         component: ThirdStepComponent
       }
     ]
