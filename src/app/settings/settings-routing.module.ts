@@ -9,7 +9,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'create',
-                loadChildren: './event-creator/event-creator.module#EventCreatorModule'
+                loadChildren: './../event-creator/event-creator.module#EventCreatorModule'
             }
         ]
     }];
