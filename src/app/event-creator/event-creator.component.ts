@@ -47,7 +47,8 @@ export class EventCreatorComponent implements OnInit, OnDestroy {
 
     const config = new TemplateModalConfig(this.modalTemplate);
 
-    config.size = 'normal';
+    config.size = 'tiny';
+    config.isInverted = true;
 
     this.modal = this.modalService.open(config);
   }

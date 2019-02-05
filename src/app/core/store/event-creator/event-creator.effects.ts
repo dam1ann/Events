@@ -4,6 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { IEvent } from '../../models/event.interface';
 
 export type Action = eventCreatorActions.All;
 
@@ -18,24 +19,21 @@ export class EventCreatorEffects {
   checkName: Observable<Action> = this.actions.pipe(
     ofType(eventCreatorActions.CHECK_NAME),
     map((action: eventCreatorActions.CheckName) => action.payload),
-    switchMap(({name}) => from(this._checkName(name))),
+    switchMap(({title}: IEvent) => from(this._checkTitle(title))),
     map(() => new eventCreatorActions.NameValid()),
     catchError(err => of(new eventCreatorActions.NameError({error: err.message})))
   );
 
-  private _checkName(name): Observable<any> {
-    const coll = this.afs.collection('events', ref => ref.where('name', '==', name));
+  private _checkTitle(title = ''): Observable<any> {
+    const collection = this.afs.collection('events', ref => ref.where('name', '==', title));
 
-    return coll.snapshotChanges().pipe(
+    return collection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data();
         const id = a.payload.doc.id;
         return {id, ...data};
       })),
-      tap(data => {
-        console.log(data);
-      }),
-      switchMap(data => !!data.length ? throwError('Name exist') : of(true))
+      switchMap(data => !!data.length ? throwError({message: 'Title exist'}) : of(true))
     );
   }
 }

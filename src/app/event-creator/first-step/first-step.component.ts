@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 
 import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 
 interface AppState {
@@ -19,9 +20,12 @@ interface AppState {
 })
 export class FirstStepComponent implements OnInit {
 
+
   header = 'Add new event';
-  name: string;
-  name$: Observable<any>;
+  name;
+
+  creatorStore$: Observable<any>;
+  state;
 
   constructor(private router: Router,
               private location: Location,
@@ -30,17 +34,25 @@ export class FirstStepComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.name$ = this.store.select('event-creator');
+    this.creatorStore$ = this.store.select('event-creator').pipe(
+      tap(state => {
+        if (state && !state.loading && !state.error && this.state && this.state.loading) {
+          return this.router.navigate(['../second'], {relativeTo: this.route});
+        }
+        if (state && state.name) {
+          this.name = state.name;
+        }
+        this.state = state;
+      })
+    );
   }
 
   async onNext() {
-    this.store.dispatch(new eventCreatorActions.CheckName({name: this.name}));
-
-
-    await this.router.navigate(['../second'], {relativeTo: this.route});
+    await this.store.dispatch(new eventCreatorActions.CheckName({name: this.name}));
   }
 
   async onCancel() {
     this.location.back();
   }
+
 }

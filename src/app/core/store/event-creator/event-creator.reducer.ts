@@ -2,7 +2,12 @@ import * as EventCreatorActions from '../event-creator/event-creator.actions';
 
 export type Action = EventCreatorActions.All;
 
-export function eventCreatorReducer(state, action: Action) {
+const defaultState = {
+  name: '',
+  loading: false
+};
+
+export function eventCreatorReducer(state = defaultState, action: Action) {
   switch (action.type) {
     case EventCreatorActions.CHECK_NAME:
       return {
@@ -20,7 +25,20 @@ export function eventCreatorReducer(state, action: Action) {
     case EventCreatorActions.NAME_ERROR:
       return {
         ...state,
+        ...action.payload,
         loading: false
+      };
+
+    case EventCreatorActions.SECOND_STEP_SUCCESS:
+      return {
+        ...state,
+        ...action.payload
+      };
+
+    case EventCreatorActions.SECOND_STEP_ERROR:
+      return {
+        ...state,
+        ...action.payload
       };
   }
 }

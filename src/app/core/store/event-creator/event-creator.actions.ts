@@ -1,13 +1,13 @@
 import { Action } from '@ngrx/store';
 
-export const CHECK_NAME = '[Event creator] Check event name';
-export const NAME_ERROR = '[Event creator] Event name already exist';
-export const NAME_VALID = '[Event creator] Correct event name';
-
+export const CHECK_NAME = '[Event creator] Check event title';
+export const NAME_ERROR = '[Event creator] Event title already exist';
+export const NAME_VALID = '[Event creator] Correct event title';
+export const SECOND_STEP_SUCCESS = '[Event creator] Second step success';
+export const SECOND_STEP_ERROR = '[Event creator] Second step success';
 
 export class CheckName implements Action {
   readonly type = CHECK_NAME;
-  readonly name: string;
 
   constructor(public payload?: any) {
   }
@@ -30,8 +30,26 @@ export class NameValid implements Action {
   }
 }
 
+export class SecondStepSuccess implements Action {
+  readonly type = SECOND_STEP_SUCCESS;
+
+  constructor(public payload?: any) {
+
+  }
+}
+
+export class SecondStepError implements Action {
+  readonly type = SECOND_STEP_ERROR;
+
+  constructor(public payload?: any) {
+
+  }
+}
+
 
 export type All =
   CheckName |
   NameError |
-  NameValid;
+  NameValid |
+  SecondStepError |
+  SecondStepSuccess;

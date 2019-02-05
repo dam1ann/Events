@@ -1,39 +1,44 @@
-<div class="header">Choose more info about your event</div>
-<div class="content">
-  <div class="ui section padded">
-    
-    <div class="ui hidden divider"></div>
-    <div class="ui hidden divider"></div>
-    
-    <div class="ui  segment">
-      <button class="ui red basic button">Red</button>
-      <button class="ui orange basic button">Orange</button>
-      <button class="ui yellow basic button">Yellow</button>
-      <button class="ui olive basic button">Olive</button>
-      <button class="ui green basic button">Green</button>
-      <button class="ui teal basic button">Teal</button>
-      <button class="ui blue basic button">Blue</button>
-      <button class="ui violet basic button">Violet</button>
-      <button class="ui purple basic button">Purple</button>
-      <button class="ui pink basic button">Pink</button>
-      <button class="ui brown basic button">Brown</button>
-      <button class="ui grey basic button">Grey</button>
-      <button class="ui black basic button">Black</button>
-    </div>
-    
-    <div class="ui hidden divider"></div>
-    <div class="ui hidden divider"></div>
+<div class="ui segment"
+     [class.loading]="(creatorStore$ | async)?.loading">
   
+  <div class="header">Choose more info about your event</div>
+  <div class="content">
+    <div class="ui section padded">
+      
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+      
+      <div class="ui  segment">
+        <button class="ui red basic button">Red</button>
+        <button class="ui orange basic button">Orange</button>
+        <button class="ui yellow basic button">Yellow</button>
+        <button class="ui olive basic button">Olive</button>
+        <button class="ui green basic button">Green</button>
+        <button class="ui teal basic button">Teal</button>
+        <button class="ui blue basic button">Blue</button>
+        <button class="ui violet basic button">Violet</button>
+        <button class="ui purple basic button">Purple</button>
+        <button class="ui pink basic button">Pink</button>
+        <button class="ui brown basic button">Brown</button>
+        <button class="ui grey basic button">Grey</button>
+        <button class="ui black basic button">Black</button>
+      </div>
+      
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+    
+    </div>
   </div>
-</div>
-<div class="actions">
-  <div class="ui red basic cancel button" (click)="onCancel()">
-    <i class="remove icon"></i>Cancel
+  <div class="actions">
+    <div class="ui red basic cancel button" (click)="onCancel()">
+      <i class="remove icon"></i>Cancel
+    </div>
+    <div class="ui red basic cancel button" (click)="onBack()">
+      <i class="remove icon"></i>Back
+    </div>
+    <div class="ui green ok button" (click)="onNext()">
+      <i class="checkmark icon"></i>Next
+    </div>
   </div>
-  <div class="ui red basic cancel button" (click)="onBack()">
-  <i class="remove icon"></i>Back
-  </div>
-  <div class="ui green ok button" (click)="onNext()">
-    <i class="checkmark icon"></i>Next
-  </div>
+
 </div>

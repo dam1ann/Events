@@ -39,8 +39,9 @@ export class UserEffects {
   googleLogin: Observable<Action> = this.actions.pipe(
     ofType(userActions.GOOGLE_LOGIN),
     map((action: userActions.GoogleLogin) => action.payload),
-    switchMap(() => from(this._googleLogin())),
-    map(() => new userActions.GetUser()),
+    switchMap(payload => from(this._googleLogin())),
+    // successful login
+    map(credential => new userActions.GetUser()),
     catchError(err => of(new userActions.AuthError({error: err.message})))
   );
 
@@ -48,8 +49,8 @@ export class UserEffects {
   facebookLogin: Observable<Action> = this.actions.pipe(
     ofType(userActions.FACEBOOK_LOGIN),
     map((action: userActions.FacebookLogin) => action.payload),
-    switchMap(() => from(this._facebookLogin())),
-    map(() => new userActions.GetUser()),
+    switchMap(payload => from(this._facebookLogin())),
+    map(credential => new userActions.GetUser()),
     catchError(err => of(new userActions.AuthError({error: err.message})))
   );
 
@@ -58,8 +59,8 @@ export class UserEffects {
   logout: Observable<Action> = this.actions.pipe(
     ofType(userActions.LOGOUT),
     map((action: userActions.Logout) => action.payload),
-    switchMap(() => of(this.afAuth.auth.signOut())),
-    map(() => new userActions.NotAuthenticated()),
+    switchMap(payload => of(this.afAuth.auth.signOut())),
+    map(authData => new userActions.NotAuthenticated()),
     catchError(err => of(new userActions.AuthError({error: err.message})))
   );
 
