@@ -7,6 +7,7 @@ import { SecondStepComponent } from './second-step/second-step.component';
 import { ThirdStepComponent } from './third-step/third-step.component';
 import { SuiModalModule } from 'ng2-semantic-ui';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
     ThirdStepComponent
   ],
   imports: [
+    FormsModule,
     CommonModule,
     SuiModalModule,
     RouterModule,
