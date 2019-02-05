@@ -1,3 +1,29 @@
-<p>
-  third-step works!
-</p>
+<div class="header">Choose more info about your event</div>
+<div class="content">
+  <div class="ui section padded">
+    
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+    
+    <div class="ui  segment">
+      <p>
+        third-step works!
+      </p>
+    </div>
+    
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+  
+  </div>
+</div>
+<div class="actions">
+  <div class="ui red basic cancel button" (click)="onCancel()">
+    <i class="remove icon"></i>Cancel
+  </div>
+  <div class="ui red basic cancel button" (click)="onBack()">
+    <i class="remove icon"></i>Back
+  </div>
+  <div class="ui green ok button" (click)="onFinish()">
+    <i class="checkmark icon"></i>Create
+  </div>
+</div>

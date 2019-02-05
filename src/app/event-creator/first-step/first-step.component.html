@@ -1,8 +1,30 @@
-<div class="ui transparent icon input fluid">
-  <input type="text"
-         placeholder="Type name..."
-         autofocus>
-  <!--<i class="inverted  plus icon"></i>-->
+<div class="header">Add new event</div>
+<div class="content">
+  <div class="ui section padded">
+    
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+    
+    <div class="ui transparent icon input fluid">
+      <input type="text"
+             placeholder="Type name..."
+             autofocus>
+      <!--<i class="inverted  plus icon"></i>-->
+    </div>
+    
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+  
+  </div>
 </div>
-
-
+<div class="actions">
+  <div class="ui red basic cancel button" (click)="onCancel()">
+    <i class="remove icon"></i>Cancel
+  </div>
+  <!--<div class="ui red basic cancel button" (click)="back()">-->
+    <!--<i class="remove icon"></i>Back-->
+  <!--</div>-->
+  <div class="ui green ok button" (click)="onNext()">
+    <i class="checkmark icon"></i>Next
+  </div>
+</div>

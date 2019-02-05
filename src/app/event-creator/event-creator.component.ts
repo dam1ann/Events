@@ -26,7 +26,7 @@ export class EventCreatorComponent implements OnInit, OnDestroy {
 
   constructor(private modalService: SuiModalService,
               private route: ActivatedRoute,
-              private _location: Location,
+              private location: Location,
               private router: Router) {
   }
 
@@ -42,53 +42,29 @@ export class EventCreatorComponent implements OnInit, OnDestroy {
     this.modal.destroy();
   }
 
-  open(dynamicContent: string = '') {
+
+  private open(dynamicContent: string = '') {
+
     const config = new TemplateModalConfig(this.modalTemplate);
 
     config.size = 'normal';
-    config.isInverted = true;
 
     this.modal = this.modalService.open(config);
   }
 
 
-  onDeny() {
-    this.cancel();
-  }
+  private onDeny() {
+    const url = this.router.url;
 
-
-  async next() {
-    switch (this.activeStep) {
-      case 1 :
-        await this.router.navigate([`../create/second`], {relativeTo: this.route});
-        this.activeStep++;
-        break;
-
-      case 2 :
-        await this.router.navigate([`../create/third`], {relativeTo: this.route});
-        this.activeStep++;
-        break;
-
+    if (url.includes('first')) {
+      this.location.back();
+    } else if (url.includes('second')) {
+      this.location.back();
+      this.location.back();
+    } else {
+      this.location.back();
+      this.location.back();
+      this.location.back();
     }
-  }
-
-
-  async back() {
-    switch (this.activeStep) {
-      case 2 :
-        await this.router.navigate([`../create/first`], {relativeTo: this.route});
-        this.activeStep--;
-        break;
-
-      case 3 :
-        await this.router.navigate([`../create/second`], {relativeTo: this.route});
-        this.activeStep--;
-        break;
-
-    }
-  }
-
-  async cancel() {
-    await this.router.navigate(['../'], {relativeTo: this.route});
   }
 }

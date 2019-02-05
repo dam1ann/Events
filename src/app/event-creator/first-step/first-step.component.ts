@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-first-step',
@@ -8,9 +10,20 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class FirstStepComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private router: Router,
+              private location: Location,
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
   }
 
+  async onNext() {
+    await this.router.navigate(['../second'], {relativeTo: this.route});
+  }
+
+  async onCancel() {
+    this.location.back();
+  }
 }
