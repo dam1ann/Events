@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { ApiService } from '../../core/services/api.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
 interface AppState {
@@ -19,11 +21,33 @@ interface AppState {
 })
 export class SecondStepComponent implements OnInit {
 
+  locations: Array<any>;
+  selectedLocation;
   creatorStore$: Observable<any>;
   state;
+  moreInfoForm: FormGroup;
+
+  get venue(): FormControl {
+    return this.moreInfoForm.get('venue') as FormControl;
+  }
+
+  get address(): FormControl {
+    return this.moreInfoForm.get('address') as FormControl;
+  }
+
+  get website(): FormControl {
+    return this.moreInfoForm.get('website') as FormControl;
+  }
+
+  get location(): FormControl {
+    return this.moreInfoForm.get('location') as FormControl;
+  }
+
 
   constructor(private router: Router,
-              private location: Location,
+              private lc: Location,
+              private api: ApiService,
+              private fb: FormBuilder,
               private store: Store<AppState>,
               private route: ActivatedRoute) {
   }
@@ -31,30 +55,31 @@ export class SecondStepComponent implements OnInit {
   ngOnInit() {
     this.creatorStore$ = this.store.select('event-creator').pipe(
       tap(state => {
-        // if (state && !state.loading && !state.error && this.state && this.state.loading) {
-        //   return this.router.navigate(['../second'], {relativeTo: this.route});
-        // }
-        // if (state && state.name) {
-        //   this.name = state.name;
-        // }
         this.state = state;
       })
     );
+
+    this.api.getLocations().subscribe(data => {
+      this.locations = data;
+    });
+
+    this.moreInfoForm = this.fb.group({
+      venue: [],
+      address: [],
+      website: [],
+      location: []
+    });
   }
 
+  submit() {
+
+  }
 
   async onNext() {
-
     await this.router.navigate(['../third'], {relativeTo: this.route});
   }
 
   async onBack() {
-    this.location.back();
+    this.lc.back();
   }
-
-  async onCancel() {
-    this.location.back();
-    this.location.back();
-  }
-
 }

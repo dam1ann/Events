@@ -5,9 +5,9 @@ import { EventCreatorRoutingModule } from './event-creator-routing.module';
 import { FirstStepComponent } from './first-step/first-step.component';
 import { SecondStepComponent } from './second-step/second-step.component';
 import { ThirdStepComponent } from './third-step/third-step.component';
-import { SuiModalModule } from 'ng2-semantic-ui';
+import { SuiModalModule, SuiPopupModule, SuiSelectModule } from 'ng2-semantic-ui';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +22,10 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     SuiModalModule,
     RouterModule,
-    EventCreatorRoutingModule
+    EventCreatorRoutingModule,
+    SuiPopupModule,
+    SuiSelectModule,
+    ReactiveFormsModule
   ],
   exports: [
     EventCreatorComponent

@@ -26,9 +26,4 @@ export class ThirdStepComponent implements OnInit {
     await this.location.back();
   }
 
-  async onCancel() {
-    this.location.back();
-    this.location.back();
-    this.location.back();
-  }
 }

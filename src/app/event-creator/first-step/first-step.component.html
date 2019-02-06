@@ -1,36 +1,45 @@
-<div class="ui segment"
-     [class.loading]="(creatorStore$ | async)?.loading">
+<div class="ui segment firstStep"
+     [class.loading]="(creatorStore$ | async)?.loading || !!selectedCategories.length">
   <div class="header">{{header}}</div>
   <div class="content">
     <div class="ui section padded">
       
       <div class="ui hidden divider"></div>
-      <div class="ui hidden divider"></div>
       
-      <div class="ui transparent icon input fluid">
-        <input type="text"
-               (keydown.enter)="onNext()"
-               [(ngModel)]="name"
-               placeholder="Type name..."
-               autofocus>
-        <!--<i class="inverted  plus icon"></i>-->
-      </div>
-      
-      <div class="ui hidden divider"></div>
-      <div class="ui hidden divider"></div>
+      <form class="ui form">
+        <div class="field ">
+          <label>Name</label>
+          <input type="text"
+                 (keydown.enter)="onNext()"
+                 [(ngModel)]="name"
+                 placeholder="Type name..."
+                 autofocus>
+        </div>
+  
+        <div class="ui hidden divider"></div>
+  
+        <div class="field ">
+          <label>Event type</label>
+          <button *ngFor="let category of categories"
+                  class="ui button circular icon "
+                  [ngClass]="category.color"
+                  [class.basic]="!categoryExist(category)"
+                  (click)="selectCategory(category)"
+                  popupText="{{category.name}}"
+                  popupPlacement="bottom"
+                  suiPopup>
+            <i class="icon" [ngClass]="category.icon"></i>
+          </button>
+        </div>
+      </form>
     
     </div>
   </div>
   <div class="actions">
-    <div class="ui red basic cancel button" (click)="onCancel()">
-      <i class="remove icon"></i>Cancel
-    </div>
-    <!--<div class="ui red basic cancel button" (click)="back()">-->
-    <!--<i class="remove icon"></i>Back-->
-    <!--</div>-->
-    <div class="ui green ok button" (click)="onNext()">
-      <i class="checkmark icon"></i>Next
-    </div>
+    <a class="ui right labeled icon button green" (click)="onNext()">
+      <i class="right arrow icon"></i>
+      Next
+    </a>
   </div>
 
 </div>
