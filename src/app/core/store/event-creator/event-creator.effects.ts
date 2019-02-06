@@ -24,6 +24,22 @@ export class EventCreatorEffects {
     catchError(err => of(new eventCreatorActions.NameError({error: err.message})))
   );
 
+
+  @Effect()
+  checkMoreInfo: Observable<Action> = this.actions.pipe(
+    ofType(eventCreatorActions.CHECK_MORE_INFO),
+    map((action: eventCreatorActions.CheckMoreInfo) => action.payload),
+    switchMap((data) => from(this._checkMoreInfo(data))),
+    map(() => new eventCreatorActions.SecondStepSuccess()),
+    catchError(err => of(new eventCreatorActions.SecondStepError({error: err.message})))
+  );
+
+
+  private _checkMoreInfo(data): Observable<any> {
+    console.log(data);
+    return of(true);
+  }
+
   private _checkTitle(title = ''): Observable<any> {
     const collection = this.afs.collection('events', ref => ref.where('name', '==', title));
 

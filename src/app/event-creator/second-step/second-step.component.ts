@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ApiService } from '../../core/services/api.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
 
 
 interface AppState {
@@ -22,10 +23,9 @@ interface AppState {
 export class SecondStepComponent implements OnInit {
 
   locations: Array<any>;
-  selectedLocation;
   creatorStore$: Observable<any>;
-  state;
   moreInfoForm: FormGroup;
+  state;
 
   get venue(): FormControl {
     return this.moreInfoForm.get('venue') as FormControl;
@@ -71,12 +71,14 @@ export class SecondStepComponent implements OnInit {
     });
   }
 
-  submit() {
-
-  }
-
   async onNext() {
-    await this.router.navigate(['../third'], {relativeTo: this.route});
+    this.store.dispatch(new eventCreatorActions.CheckMoreInfo({
+      venue: this.venue.value || '',
+      address: this.address.value || '',
+      website: this.website.value || '',
+      location: this.location.value || ''
+    }));
+    // await this.router.navigate(['../third'], {relativeTo: this.route});
   }
 
   async onBack() {
