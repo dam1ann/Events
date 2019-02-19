@@ -6,6 +6,7 @@ import * as eventCreatorActions from '../../core/store/event-creator/event-creat
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ApiService } from '../../core/services/api.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
 interface AppState {
@@ -24,14 +25,24 @@ export class FirstStepComponent implements OnInit, OnDestroy {
   categories: Array<any>;
   selectedCategories: Array<any>;
   creatorStore$: Observable<any>;
+  firstStepForm: FormGroup;
+
+
+  get name(): FormControl {
+    return this.firstStepForm.get('name') as FormControl;
+  }
+
+  set name(value) {
+    this.firstStepForm.get('name').setValue(value);
+  }
 
   private state;
-  private name;
 
   constructor(private router: Router,
               private api: ApiService,
               private route: ActivatedRoute,
-              private store: Store<AppState>) {
+              private store: Store<AppState>,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
@@ -47,11 +58,11 @@ export class FirstStepComponent implements OnInit, OnDestroy {
       })
     );
 
-    this.api.getCategories().subscribe(data => {
-      this.categories = data;
-      console.log(data);
-    });
+    this.api.getCategories().subscribe(data => this.categories = data);
     this.selectedCategories = [];
+    this.firstStepForm = this.fb.group({
+      name: []
+    });
   }
 
 
@@ -72,6 +83,7 @@ export class FirstStepComponent implements OnInit, OnDestroy {
     } else {
       this.selectedCategories = [...this.selectedCategories, category];
     }
+
     console.log(this.selectedCategories);
   }
 

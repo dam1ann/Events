@@ -55,6 +55,9 @@ export class SecondStepComponent implements OnInit {
   ngOnInit() {
     this.creatorStore$ = this.store.select('event-creator').pipe(
       tap(state => {
+        console.log('state', state);
+        // await this.router.navigate(['../third'], {relativeTo: this.route});
+
         this.state = state;
       })
     );
@@ -78,7 +81,6 @@ export class SecondStepComponent implements OnInit {
       website: this.website.value || '',
       location: this.location.value || ''
     }));
-    // await this.router.navigate(['../third'], {relativeTo: this.route});
   }
 
   async onBack() {

@@ -1,23 +1,22 @@
 <div class="ui segment firstStep"
-     [class.loading]="(creatorStore$ | async)?.loading || !!selectedCategories.length">
+     [class.loading]="(creatorStore$ | async)?.loading">
   <div class="header">{{header}}</div>
   <div class="content">
     <div class="ui section padded">
       
       <div class="ui hidden divider"></div>
       
-      <form class="ui form">
+      <form class="ui form" [formGroup]="firstStepForm">
         <div class="field ">
           <label>Name</label>
           <input type="text"
-                 (keydown.enter)="onNext()"
-                 [(ngModel)]="name"
+                 formControlName="name"
                  placeholder="Type name..."
                  autofocus>
         </div>
-  
+        
         <div class="ui hidden divider"></div>
-  
+        
         <div class="field ">
           <label>Event type</label>
           <button *ngFor="let category of categories"
