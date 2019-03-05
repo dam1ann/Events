@@ -50,5 +50,26 @@ export function eventCreatorReducer(state = defaultState, action: Action) {
         ...action.payload,
         loading: false
       };
+
+    case EventCreatorActions.CREATE_EVENT:
+      return {
+        ...state,
+        ...action.payload,
+        loading: true
+      };
+
+    case EventCreatorActions.CREATE_EVENT_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false
+      };
+
+    case EventCreatorActions.CREATE_EVENT_ERROR:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false
+      };
   }
 }

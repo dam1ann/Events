@@ -1,6 +1,19 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Store } from '@ngrx/store';
+import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
+
+
+interface AppState {
+  address: string;
+  categories: string;
+  loading: string;
+  location: string;
+  name: string;
+  venue: string;
+  website: string;
+}
 
 @Component({
   selector: 'app-third-step',
@@ -12,6 +25,7 @@ export class ThirdStepComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
+              private store: Store<AppState>,
               private location: Location) {
   }
 
@@ -19,7 +33,7 @@ export class ThirdStepComponent implements OnInit {
   }
 
   async onFinish() {
-    await this.router.navigate(['../../'], {relativeTo: this.route});
+    await this.store.dispatch(new eventCreatorActions.CreateEvent());
   }
 
   async onBack() {

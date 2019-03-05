@@ -13,6 +13,7 @@ import { userReducer } from './store/user/user.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { eventCreatorReducer } from './store/event-creator/event-creator.reducer';
 import { EventCreatorEffects } from './store/event-creator/event-creator.effects';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { EventCreatorEffects } from './store/event-creator/event-creator.effects
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    AngularFireDatabaseModule,
     EffectsModule.forRoot([UserEffects]),
     StoreModule.forRoot({
       user: userReducer

@@ -6,6 +6,10 @@ export const NAME_VALID = '[Event creator] Correct event title';
 export const CHECK_MORE_INFO = '[Event creator] Check more info';
 export const SECOND_STEP_SUCCESS = '[Event creator] Second step success';
 export const SECOND_STEP_ERROR = '[Event creator] Second step success';
+export const CREATE_EVENT = '[Event creator] Creating event';
+export const CREATE_EVENT_SUCCESS = '[Event creator] Event succesfully craeted';
+export const CREATE_EVENT_ERROR = '[Event creator] Event cration error';
+
 
 export class CheckName implements Action {
   readonly type = CHECK_NAME;
@@ -56,6 +60,30 @@ export class SecondStepError implements Action {
 }
 
 
+export class CreateEvent implements Action {
+  readonly type = CREATE_EVENT;
+
+  constructor(public payload?: any) {
+
+  }
+}
+
+export class CreateEventSuccess implements Action {
+  readonly type = CREATE_EVENT_SUCCESS;
+
+  constructor(public payload?: any) {
+  }
+}
+
+export class CreateEventError implements Action {
+  readonly type = CREATE_EVENT_ERROR;
+
+  constructor(public payload?: any) {
+
+  }
+
+}
+
 
 export type All =
   CheckName |
@@ -63,4 +91,7 @@ export type All =
   NameValid |
   SecondStepError |
   CheckMoreInfo |
-  SecondStepSuccess;
+  SecondStepSuccess |
+  CreateEvent |
+  CreateEventSuccess |
+  CreateEventError;

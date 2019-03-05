@@ -9,9 +9,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
 
 
-interface AppState {
-  name: string;
-}
 
 
 @Component({
@@ -48,7 +45,7 @@ export class SecondStepComponent implements OnInit {
               private lc: Location,
               private api: ApiService,
               private fb: FormBuilder,
-              private store: Store<AppState>,
+              private store: Store<any>,
               private route: ActivatedRoute) {
   }
 
@@ -56,7 +53,9 @@ export class SecondStepComponent implements OnInit {
     this.creatorStore$ = this.store.select('event-creator').pipe(
       tap(state => {
         console.log('state', state);
-        // await this.router.navigate(['../third'], {relativeTo: this.route});
+        if (state && !state.loading && !state.error && this.state && this.state.loading) {
+          return this.router.navigate(['../third'], {relativeTo: this.route});
+        }
 
         this.state = state;
       })

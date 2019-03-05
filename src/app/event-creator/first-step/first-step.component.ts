@@ -51,8 +51,8 @@ export class FirstStepComponent implements OnInit, OnDestroy {
         if (state && !state.loading && !state.error && this.state && this.state.loading) {
           return this.router.navigate(['../second'], {relativeTo: this.route});
         }
-        if (state && state.name) {
-          this.name = state.name;
+        if (state && state.title) {
+          this.name = state.title;
         }
         this.state = state;
       })
@@ -83,16 +83,16 @@ export class FirstStepComponent implements OnInit, OnDestroy {
     } else {
       this.selectedCategories = [...this.selectedCategories, category];
     }
-
-    console.log(this.selectedCategories);
   }
 
   categoryExist(category): boolean {
     return this.selectedCategories.find(cat => cat.name === category.name);
-
   }
 
   async onNext() {
-    await this.store.dispatch(new eventCreatorActions.CheckName({name: this.name}));
+    await this.store.dispatch(new eventCreatorActions.CheckName({
+      title: this.name.value || '',
+      categories: this.selectedCategories.map(cat => cat.name) || []
+    }));
   }
 }
