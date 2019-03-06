@@ -1,5 +1,6 @@
 import { IUser, User } from '../../models/user.interface';
 import * as userActions from './user.actions';
+import { createSelector } from '@ngrx/store';
 
 export type Action = userActions.All;
 
@@ -13,17 +14,17 @@ const defaultUserState = {
   loading: false
 };
 
-export function userReducer(state = defaultUserState, action: Action): UserState {
+export function userReducer(userState = defaultUserState, action: Action): UserState {
   switch (action.type) {
 
     case userActions.GET_USER:
-      return {...state, loading: true};
+      return {...userState, loading: true};
 
     case userActions.AUTHENTICATED:
       return {
-        ...state,
+        ...userState,
         user: <IUser>{
-          ...state.user,
+          ...userState.user,
           ...action.payload
         },
         loading: false
@@ -36,22 +37,27 @@ export function userReducer(state = defaultUserState, action: Action): UserState
       };
 
     case userActions.FACEBOOK_LOGIN:
-      return {...state, loading: true};
+      return {...userState, loading: true};
 
     case userActions.GOOGLE_LOGIN:
-      return {...state, loading: true};
+      return {...userState, loading: true};
 
     case userActions.AUTH_ERROR:
       return {
-        ...state,
+        ...userState,
         user: <IUser>{
-          ...state.user,
+          ...userState.user,
           ...action.payload
         },
         loading: false
       };
 
     case userActions.LOGOUT:
-      return {...state, loading: true};
+      return {...userState, loading: true};
+
+    default: {
+      return userState;
+    }
   }
 }
+

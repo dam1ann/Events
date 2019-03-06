@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
-import { AppState } from '../../core/store';
+import { CreatorState } from '../../core/store/event-creator/event-creator.reducer';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class ThirdStepComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private store: Store<AppState>,
+              private store: Store<CreatorState>,
               private location: Location) {
   }
 

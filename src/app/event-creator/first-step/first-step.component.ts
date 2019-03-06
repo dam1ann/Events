@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-
-import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { ApiService } from '../../core/services/api.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { AppState } from '../../core/store';
+
+import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
+import { CreatorState } from '../../core/store/event-creator/event-creator.reducer';
+import { ApiService } from '../../core/services/api.service';
 
 
 @Component({
@@ -39,7 +39,7 @@ export class FirstStepComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
               private api: ApiService,
               private route: ActivatedRoute,
-              private store: Store<AppState>,
+              private store: Store<CreatorState>,
               private fb: FormBuilder) {
   }
 

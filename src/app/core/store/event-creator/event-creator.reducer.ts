@@ -14,15 +14,14 @@ const defaultCreatorState = {
 };
 
 
-export function creatorReducer(state = defaultCreatorState, action: Action): CreatorState {
+export function creatorReducer(eventState = defaultCreatorState, action: Action): CreatorState {
   switch (action.type) {
 
     case EventCreatorActions.CHECK_NAME:
-      console.log(state, action);
       return {
-        ...state,
+        ...eventState,
         event: <IEvent>{
-          ...state.event,
+          ...eventState.event,
           ...action.payload,
         },
         loading: true
@@ -30,57 +29,57 @@ export function creatorReducer(state = defaultCreatorState, action: Action): Cre
 
     case EventCreatorActions.NAME_VALID:
       return {
-        ...state,
+        ...eventState,
         loading: false
       };
 
     case EventCreatorActions.NAME_ERROR:
       return {
-        ...state,
+        ...eventState,
         loading: false
       };
 
     case EventCreatorActions.CHECK_MORE_INFO:
       return {
-        ...state,
+        ...eventState,
         event: <IEvent>{
-          ...state.event,
+          ...eventState.event,
           ...action.payload,
         }, loading: true
       };
 
     case EventCreatorActions.SECOND_STEP_SUCCESS:
       return {
-        ...state,
+        ...eventState,
         loading: false
       };
 
     case EventCreatorActions.SECOND_STEP_ERROR:
       return {
-        ...state,
+        ...eventState,
         loading: false
       };
 
     case EventCreatorActions.CREATE_EVENT:
       return {
-        ...state,
+        ...eventState,
         loading: true
       };
 
     case EventCreatorActions.CREATE_EVENT_SUCCESS:
       return {
-        ...state,
+        ...eventState,
         loading: false
       };
 
     case EventCreatorActions.CREATE_EVENT_ERROR:
       return {
-        ...state,
+        ...eventState,
         loading: false
       };
 
     default: {
-      return state;
+      return eventState;
     }
   }
 }

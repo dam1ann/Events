@@ -13,6 +13,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EventCreatorEffects } from './store/event-creator/event-creator.effects';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { reducers } from './store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomSerializer } from './routing/custom-route-serializer';
 
 
 @NgModule({
@@ -24,6 +26,9 @@ import { reducers } from './store';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     StoreModule.forRoot(reducers),
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomSerializer
+    }),
     EffectsModule.forRoot([UserEffects, EventCreatorEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25

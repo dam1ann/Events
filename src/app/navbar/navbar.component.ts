@@ -1,15 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../core/models/user.interface';
+import { IUser } from '../core/models/user.interface';
 import { Store } from '@ngrx/store';
 
 import * as userActions from '../core/store/user/user.actions';
 import { Router } from '@angular/router';
-
-interface AppState {
-  user: User;
-}
-
+import { UserState } from '../core/store/user/user.reducer';
 
 @Component({
   selector: 'app-navbar',
@@ -19,14 +15,14 @@ interface AppState {
 })
 export class NavbarComponent implements OnInit {
 
-  user$: Observable<User>;
+  user$: Observable<IUser>;
 
-  constructor(private userStore: Store<AppState>,
+  constructor(private userStore: Store<UserState>,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.user$ = this.userStore.select('userState', 'user');
+    this.user$ = this.userStore.select( 'userState', 'user');
     this.userStore.dispatch(new userActions.GetUser());
   }
 

@@ -8,6 +8,8 @@ import { ThirdStepComponent } from './third-step/third-step.component';
 import { SuiModalModule, SuiPopupModule, SuiSelectModule } from 'ng2-semantic-ui';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { creatorReducer } from '../core/store/event-creator/event-creator.reducer';
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EventCreatorRoutingModule,
     SuiPopupModule,
     SuiSelectModule,
+    StoreModule.forFeature('creatorState', creatorReducer),
     ReactiveFormsModule
   ],
   exports: [

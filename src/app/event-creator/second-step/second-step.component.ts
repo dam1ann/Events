@@ -8,6 +8,8 @@ import { ApiService } from '../../core/services/api.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
 import { AppState } from '../../core/store';
+import { UserState } from '../../core/store/user/user.reducer';
+import { CreatorState } from '../../core/store/event-creator/event-creator.reducer';
 
 
 
@@ -46,7 +48,7 @@ export class SecondStepComponent implements OnInit {
               private lc: Location,
               private api: ApiService,
               private fb: FormBuilder,
-              private store: Store<AppState>,
+              private store: Store<CreatorState>,
               private route: ActivatedRoute) {
   }
 
