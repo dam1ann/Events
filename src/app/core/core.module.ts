@@ -9,11 +9,10 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/user/user.effects';
 import { StoreModule } from '@ngrx/store';
-import { userReducer } from './store/user/user.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { eventCreatorReducer } from './store/event-creator/event-creator.reducer';
 import { EventCreatorEffects } from './store/event-creator/event-creator.effects';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { reducers } from './store';
 
 
 @NgModule({
@@ -24,12 +23,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    EffectsModule.forRoot([UserEffects]),
-    StoreModule.forRoot({
-      user: userReducer
-    }),
-    EffectsModule.forFeature([EventCreatorEffects]),
-    StoreModule.forFeature('event-creator', eventCreatorReducer),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([UserEffects, EventCreatorEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     })

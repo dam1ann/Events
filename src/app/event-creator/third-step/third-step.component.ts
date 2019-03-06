@@ -3,17 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
+import { AppState } from '../../core/store';
 
-
-interface AppState {
-  address: string;
-  categories: string;
-  loading: string;
-  location: string;
-  name: string;
-  venue: string;
-  website: string;
-}
 
 @Component({
   selector: 'app-third-step',

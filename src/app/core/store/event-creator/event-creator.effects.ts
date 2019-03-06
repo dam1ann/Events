@@ -19,7 +19,6 @@ export class EventCreatorEffects {
               private afs: AngularFirestore) {
 
     this.eventsRef = afs.collection<IEvent>('events');
-    // Use snapshotChanges().map() to store the key
     this.eventsRef.snapshotChanges().pipe(
       tap(changes => console.log(changes))
     );
@@ -29,7 +28,7 @@ export class EventCreatorEffects {
   checkName: Observable<Action> = this.actions.pipe(
     ofType(eventCreatorActions.CHECK_NAME),
     map((action: eventCreatorActions.CheckName) => action.payload),
-    switchMap(({title}: IEvent) => from(this._correctEventTitle(title))),
+    switchMap(({title}: IEvent) => this._correctEventTitle(title)),
     map(() => new eventCreatorActions.NameValid()),
     catchError(err => of(new eventCreatorActions.NameError({error: err.message})))
   );
@@ -39,7 +38,7 @@ export class EventCreatorEffects {
   checkMoreInfo: Observable<Action> = this.actions.pipe(
     ofType(eventCreatorActions.CHECK_MORE_INFO),
     map((action: eventCreatorActions.CheckMoreInfo) => action.payload),
-    switchMap((data) => from(this._checkMoreInfo(data))),
+    switchMap((data) => this._checkMoreInfo(data)),
     map(() => new eventCreatorActions.SecondStepSuccess()),
     catchError(err => of(new eventCreatorActions.SecondStepError({error: err.message})))
   );
@@ -48,7 +47,7 @@ export class EventCreatorEffects {
   @Effect()
   createEvent: Observable<Action> = this.actions.pipe(
     ofType(eventCreatorActions.CREATE_EVENT),
-    withLatestFrom(this.store.select('event-creator')),
+    withLatestFrom(this.store.select('creatorState', 'event')),
     switchMap(data => from(this._createEvent(data))),
     map(() => new eventCreatorActions.CreateEventSuccess())
     // catchError(err => of(new eventCreatorActions.CreateEventError({error: err.message})))
@@ -82,8 +81,6 @@ export class EventCreatorEffects {
   private async _createEvent(data) {
 
     const event: IEvent = <IEvent>data[1];
-    console.log(event.title);
-
 
     return this._correctEventTitle(event.title).pipe(
       switchMap(correct => {
@@ -96,10 +93,5 @@ export class EventCreatorEffects {
         return of(true);
       })
     );
-
-    // if (eventExist) {
-    //   return of(throwError('Event already exist'));
-    // }
-
   }
 }

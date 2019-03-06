@@ -7,16 +7,14 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ApiService } from '../../core/services/api.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AppState } from '../../core/store';
 
-
-interface AppState {
-  name: string;
-}
 
 @Component({
   selector: 'app-first-step',
   templateUrl: './first-step.component.html',
-  styleUrls: ['./first-step.component.scss']
+  styleUrls: ['./first-step.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FirstStepComponent implements OnInit, OnDestroy {
 
@@ -46,13 +44,13 @@ export class FirstStepComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.creatorStore$ = this.store.select('event-creator').pipe(
+    this.creatorStore$ = this.store.select('creatorState').pipe(
       tap(state => {
         if (state && !state.loading && !state.error && this.state && this.state.loading) {
           return this.router.navigate(['../second'], {relativeTo: this.route});
         }
-        if (state && state.title) {
-          this.name = state.title;
+        if (state && state.event.title) {
+          this.name = state.event.title;
         }
         this.state = state;
       })

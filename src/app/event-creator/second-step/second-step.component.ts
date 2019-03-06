@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { ApiService } from '../../core/services/api.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
+import { AppState } from '../../core/store';
 
 
 
@@ -45,14 +46,13 @@ export class SecondStepComponent implements OnInit {
               private lc: Location,
               private api: ApiService,
               private fb: FormBuilder,
-              private store: Store<any>,
+              private store: Store<AppState>,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.creatorStore$ = this.store.select('event-creator').pipe(
+    this.creatorStore$ = this.store.select('creatorState').pipe(
       tap(state => {
-        console.log('state', state);
         if (state && !state.loading && !state.error && this.state && this.state.loading) {
           return this.router.navigate(['../third'], {relativeTo: this.route});
         }

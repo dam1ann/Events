@@ -1,19 +1,30 @@
 import * as EventCreatorActions from '../event-creator/event-creator.actions';
+import { IEvent } from '../../models/event.interface';
 
 export type Action = EventCreatorActions.All;
 
-const defaultState = {
-  name: '',
+export interface CreatorState {
+  event: IEvent;
+  loading: boolean;
+}
+
+const defaultCreatorState = {
+  event: <IEvent>{},
   loading: false
 };
 
-export function eventCreatorReducer(state = defaultState, action: Action) {
+
+export function creatorReducer(state = defaultCreatorState, action: Action): CreatorState {
   switch (action.type) {
 
     case EventCreatorActions.CHECK_NAME:
+      console.log(state, action);
       return {
         ...state,
-        ...action.payload,
+        event: <IEvent>{
+          ...state.event,
+          ...action.payload,
+        },
         loading: true
       };
 
@@ -26,50 +37,50 @@ export function eventCreatorReducer(state = defaultState, action: Action) {
     case EventCreatorActions.NAME_ERROR:
       return {
         ...state,
-        ...action.payload,
         loading: false
       };
 
     case EventCreatorActions.CHECK_MORE_INFO:
       return {
         ...state,
-        ...action.payload,
-        loading: true
+        event: <IEvent>{
+          ...state.event,
+          ...action.payload,
+        }, loading: true
       };
 
     case EventCreatorActions.SECOND_STEP_SUCCESS:
       return {
         ...state,
-        ...action.payload,
         loading: false
       };
 
     case EventCreatorActions.SECOND_STEP_ERROR:
       return {
         ...state,
-        ...action.payload,
         loading: false
       };
 
     case EventCreatorActions.CREATE_EVENT:
       return {
         ...state,
-        ...action.payload,
         loading: true
       };
 
     case EventCreatorActions.CREATE_EVENT_SUCCESS:
       return {
         ...state,
-        ...action.payload,
         loading: false
       };
 
     case EventCreatorActions.CREATE_EVENT_ERROR:
       return {
         ...state,
-        ...action.payload,
         loading: false
       };
+
+    default: {
+      return state;
+    }
   }
 }

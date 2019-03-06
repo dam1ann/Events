@@ -1,21 +1,39 @@
-import { User } from '../../models/user.interface';
+import { IUser, User } from '../../models/user.interface';
 import * as userActions from './user.actions';
 
 export type Action = userActions.All;
 
-const defaultUser = new User(null, 'Guest');
+export interface UserState {
+  user: IUser;
+  loading: boolean;
+}
 
-export function userReducer(state: User = defaultUser, action: Action) {
+const defaultUserState = {
+  user: new User(null, 'Guest'),
+  loading: false
+};
+
+export function userReducer(state = defaultUserState, action: Action): UserState {
   switch (action.type) {
 
     case userActions.GET_USER:
       return {...state, loading: true};
 
     case userActions.AUTHENTICATED:
-      return {...state, ...action.payload, loading: false};
+      return {
+        ...state,
+        user: <IUser>{
+          ...state.user,
+          ...action.payload
+        },
+        loading: false
+      };
 
     case userActions.NOT_AUTHENTICATED:
-      return {...state, ...defaultUser, loading: false};
+      return {
+        user: defaultUserState.user,
+        loading: false
+      };
 
     case userActions.FACEBOOK_LOGIN:
       return {...state, loading: true};
@@ -24,7 +42,14 @@ export function userReducer(state: User = defaultUser, action: Action) {
       return {...state, loading: true};
 
     case userActions.AUTH_ERROR:
-      return {...state, ...action.payload, loading: false};
+      return {
+        ...state,
+        user: <IUser>{
+          ...state.user,
+          ...action.payload
+        },
+        loading: false
+      };
 
     case userActions.LOGOUT:
       return {...state, loading: true};

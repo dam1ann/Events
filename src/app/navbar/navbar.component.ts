@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user$ = this.userStore.select('user');
+    this.user$ = this.userStore.select('userState', 'user');
     this.userStore.dispatch(new userActions.GetUser());
   }
 
