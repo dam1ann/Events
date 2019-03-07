@@ -1,20 +1,17 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
-
-import { environment } from '../../environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { EffectsModule } from '@ngrx/effects';
-import { UserEffects } from './store/user/user.effects';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { EventCreatorEffects } from './store/event-creator/event-creator.effects';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+
+import { UserEffects } from './store/user/user.effects';
+import { environment } from '../../environments/environment';
 import { reducers } from './store';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { CustomSerializer } from './routing/custom-route-serializer';
 
 
 @NgModule({
@@ -26,10 +23,7 @@ import { CustomSerializer } from './routing/custom-route-serializer';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     StoreModule.forRoot(reducers),
-    StoreRouterConnectingModule.forRoot({
-      serializer: CustomSerializer
-    }),
-    EffectsModule.forRoot([UserEffects, EventCreatorEffects]),
+    EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     })

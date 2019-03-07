@@ -39,8 +39,7 @@ export class UserEffects {
   googleLogin: Observable<Action> = this.actions.pipe(
     ofType(userActions.GOOGLE_LOGIN),
     map((action: userActions.GoogleLogin) => action.payload),
-    switchMap(payload => from(this._googleLogin())),
-    // successful login
+    switchMap(this._googleLogin),
     map(credential => new userActions.GetUser()),
     catchError(err => of(new userActions.AuthError({error: err.message})))
   );
@@ -49,7 +48,7 @@ export class UserEffects {
   facebookLogin: Observable<Action> = this.actions.pipe(
     ofType(userActions.FACEBOOK_LOGIN),
     map((action: userActions.FacebookLogin) => action.payload),
-    switchMap(payload => from(this._facebookLogin())),
+    switchMap(this._facebookLogin),
     map(credential => new userActions.GetUser()),
     catchError(err => of(new userActions.AuthError({error: err.message})))
   );
@@ -65,13 +64,13 @@ export class UserEffects {
   );
 
 
-  private _googleLogin(): Promise<any> {
+  private _googleLogin(): Observable<any> {
     const provider = new firebase.auth.GoogleAuthProvider();
-    return this.afAuth.auth.signInWithPopup(provider);
+    return from(this.afAuth.auth.signInWithPopup(provider));
   }
 
-  private _facebookLogin(): Promise<any> {
+  private _facebookLogin(): Observable<any> {
     const provier = new firebase.auth.FacebookAuthProvider();
-    return this.afAuth.auth.signInWithPopup(provier);
+    return from(this.afAuth.auth.signInWithPopup(provier));
   }
 }

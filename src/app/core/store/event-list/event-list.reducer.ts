@@ -17,28 +17,28 @@ const defaultListState = {
 export function listReducer(listState = defaultListState, action: Action): ListState {
   switch (action.type) {
     case eventListActions.GET_EVENTS:
-      return {
+      return <ListState>{
         ...listState,
-        list: <Array<IEvent>>{},
         loading: true
       };
 
     case eventListActions.FETCH_SUCCESS:
-      return {
+      return <ListState>{
         ...listState,
-        list: <Array<IEvent>>{
-          ...defaultListState.list
-        },
+        list: <Array<IEvent>>action.payload,
         loading: false
       };
 
     case eventListActions.FETCH_ERROR:
-      return {
+      return <ListState>{
         ...listState,
-        list: <Array<IEvent>>{},
+        list: <Array<IEvent>>[],
         loading: false
       };
 
+    default: {
+      return <ListState>listState;
+    }
   }
 
 }
