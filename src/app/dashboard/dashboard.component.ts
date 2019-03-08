@@ -27,6 +27,4 @@ export class DashboardComponent implements OnInit {
 
     this.store.dispatch(new listActions.GetEvents());
   }
-
-
 }

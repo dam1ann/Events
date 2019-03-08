@@ -15,4 +15,5 @@ export interface IEvent {
   repeat_interval?: number;
   repaet_rule?: number;
   repeat_limit?: number;
+  venue?: string;
 }

@@ -1,27 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-
-const user = {
-  name: 'Janusz',
-  surname: 'Kowalski',
-  city: 'Warsaw',
-  interest: []
-};
-
-const events = [
-  {
-    name: 'Koncert',
-    description: 'lorem',
-    time: new Date(),
-    created: new Date(),
-    creator: user,
-    comments: [],
-    likes: 10
-  }, {
-    name: 'Spektakt w teatrze',
-    description: 'loremdwad wa daw',
-    created: new Date()
-  }
-];
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angular/core';
+import { IEvent } from '../../core/models/event.interface';
 
 @Component({
   selector: 'app-events-list',
@@ -30,6 +8,8 @@ const events = [
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventsListComponent implements OnInit {
+
+  @Input() events: Array<IEvent>;
 
   constructor() {
   }

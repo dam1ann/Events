@@ -2,7 +2,7 @@ import * as eventCreatorActions from './event-creator.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { from, Observable, of, throwError } from 'rxjs';
-import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { IEvent } from '../../models/event.interface';
 import { Store } from '@ngrx/store';
@@ -19,9 +19,6 @@ export class EventCreatorEffects {
               private afs: AngularFirestore) {
 
     this.eventsRef = afs.collection<IEvent>('events');
-    this.eventsRef.snapshotChanges().pipe(
-      tap(changes => console.log(changes))
-    );
   }
 
   @Effect()
@@ -48,9 +45,9 @@ export class EventCreatorEffects {
   createEvent: Observable<Action> = this.actions.pipe(
     ofType(eventCreatorActions.CREATE_EVENT),
     withLatestFrom(this.store.select('creatorState', 'event')),
-    switchMap(data => from(this._createEvent(data))),
-    map(() => new eventCreatorActions.CreateEventSuccess())
-    // catchError(err => of(new eventCreatorActions.CreateEventError({error: err.message})))
+    mergeMap(data => this._createEvent(data)),
+    map(() => new eventCreatorActions.CreateEventSuccess()),
+    catchError(err => of(new eventCreatorActions.CreateEventError({error: err.message})))
   );
 
 
@@ -62,35 +59,35 @@ export class EventCreatorEffects {
   private _correctEventTitle(title = ''): Observable<any> {
     const collection = this.afs.collection<IEvent>('events', ref => ref.where('title', '==', title));
 
-    return collection.snapshotChanges().pipe(
+    collection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data();
         const id = a.payload.doc.id;
         return {id, ...data};
       })),
-      switchMap(data => {
-        console.log(data);
+      map(data => {
         if (!!data.length) {
           return throwError({message: 'Title exist'});
         }
         return of(true);
       })
     );
+
+    return of(true);
   }
 
-  private async _createEvent(data) {
+  private _createEvent(data): Observable<any> {
 
     const event: IEvent = <IEvent>data[1];
 
     return this._correctEventTitle(event.title).pipe(
-      switchMap(correct => {
-        console.log(correct);
+      map(correct => {
         if (!correct) {
           return throwError('Event exist');
         }
 
         this.eventsRef.add(event);
-        return of(true);
+        return true;
       })
     );
   }

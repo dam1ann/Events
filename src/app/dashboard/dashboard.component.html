@@ -1,3 +1,3 @@
 <app-filters></app-filters>
-<app-events-list></app-events-list>
+<app-events-list [events]="events$ | async "></app-events-list>
 <router-outlet></router-outlet>
