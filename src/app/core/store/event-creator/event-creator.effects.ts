@@ -59,13 +59,13 @@ export class EventCreatorEffects {
   private _correctEventTitle(title = ''): Observable<any> {
     const collection = this.afs.collection<IEvent>('events', ref => ref.where('title', '==', title));
 
-    collection.snapshotChanges().pipe(
+    return collection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data();
         const id = a.payload.doc.id;
         return {id, ...data};
       })),
-      map(data => {
+      switchMap(data => {
         if (!!data.length) {
           return throwError({message: 'Title exist'});
         }
@@ -73,7 +73,7 @@ export class EventCreatorEffects {
       })
     );
 
-    return of(true);
+    // return of(true);
   }
 
   private _createEvent(data): Observable<any> {
