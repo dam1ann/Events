@@ -34,11 +34,10 @@ export class DashboardComponent implements OnInit {
   }
 
   onSelectCategories(categories) {
-    // this.filters.filterEvents({categories});
+    this.store.dispatch(new listActions.FilterEevnts({categories}));
   }
 
   onSelectLocations(locations) {
-    // this.filters.filterEvents({locations});
-
+    this.store.dispatch(new listActions.FilterEevnts({locations}));
   }
 }

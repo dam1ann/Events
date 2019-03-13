@@ -2,17 +2,16 @@ import * as eventListActions from './event-list.actions';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { IEvent } from '../../models/event.interface';
-import 'firebase';
+import * as firebase from 'firebase';
 
 export type Action = eventListActions.All;
 
 @Injectable()
 export class EventListEffects {
 
-  private eventsCollection: AngularFirestoreCollection<IEvent>;
   events: Observable<Array<IEvent>>;
   categoryFilter$: BehaviorSubject<Array<string>>;
   locationFilter$: BehaviorSubject<Array<string>>;
@@ -27,23 +26,23 @@ export class EventListEffects {
       this.categoryFilter$,
       this.locationFilter$
     ).pipe(
-      switchMap(([category, location]) => afs.collection('events', ref => {
+      switchMap(([categories, locations]) => afs.collection('events', ref => {
         let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
 
-        if (category) {
-          query = query.where('category', '==', category[0]);
+        if (categories.length) {
+          categories.forEach(category => {
+            query = query.where('category', '==', category);
+          });
         }
 
-        if (location) {
-          query = query.where('location', '==', location[0]);
+        if (locations.length) {
+          locations.forEach(location => {
+            query = query.where('location', '==', location);
+          });
         }
-        console.log(query);
         return query;
       }).valueChanges())
     );
-
-    // this.eventsCollection = this.afs.collection('events');
-    // this.events = this.eventsCollection.valueChanges();
   }
 
   @Effect()
@@ -55,17 +54,30 @@ export class EventListEffects {
     catchError(err => of(new eventListActions.FetchError({error: err.message})))
   );
 
+  @Effect()
+  filterEvents: Observable<Action> = this.actions.pipe(
+    ofType(eventListActions.FILTER_EVENTS),
+    map((action: eventListActions.FilterEevnts) => action.payload),
+    switchMap((filters) => this._filterEvents(filters)),
+    map(() => new eventListActions.GetEvents()),
+    catchError(err => of(new eventListActions.FetchError({error: err.message})))
+  );
+
 
   private _getEvents(): Observable<Array<IEvent>> {
     return this.events;
   }
 
-  private filterByCategory(category) {
+  private _filterEvents({locations, categories}): Observable<any> {
 
-  }
+    if (locations) {
+      this.locationFilter$.next(locations);
+    }
 
-  private filterByLocation(location) {
-
+    if (categories) {
+      this.categoryFilter$.next(categories);
+    }
+    return of(true);
   }
 
 

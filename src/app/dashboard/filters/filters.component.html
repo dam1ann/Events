@@ -4,6 +4,7 @@
         <!--<span class="filter-label">City</span>-->
         <div class="filters__city">
             <button *ngFor="let city of cities"
+                    [class.basic]="!locationExist(city.name)"
                     (click)="onLocationClick(city.name)"
                     class="ui button circular">{{city.name}}</button>
         </div>
@@ -13,6 +14,7 @@
             <button *ngFor="let eventType of events"
                     class="ui button circular icon"
                     [ngClass]="eventType.color"
+                    [class.basic]="!categoryExist(eventType.name)"
                     (click)="onCategoryClick(eventType.name)"
                     popupText="{{eventType.name}}"
                     popupPlacement="bottom"

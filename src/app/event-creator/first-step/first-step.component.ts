@@ -41,9 +41,11 @@ export class FirstStepComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private store: Store<CreatorState>,
               private fb: FormBuilder) {
+    console.log('init constructor');
   }
 
   ngOnInit() {
+    console.log('test');
     this.creatorStore$ = this.store.select('creatorState').pipe(
       tap(state => {
         if (state && !state.loading && !state.error && this.state && this.state.loading) {

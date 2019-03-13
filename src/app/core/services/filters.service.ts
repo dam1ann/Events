@@ -3,6 +3,7 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { ILocation } from '../models/location.interface';
 import { ICategory } from '../models/category.interface';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -27,5 +28,14 @@ export class FiltersService {
 
     this._locations$ = locationsCollection.valueChanges();
     this._categories$ = categoriesCollection.valueChanges();
+  }
+
+  getCategory(name): Observable<Array<ICategory>> {
+    const collection: AngularFirestoreCollection<ICategory> = this.afs.collection('categories');
+    return collection.snapshotChanges().pipe(
+      map(actions => actions.map(a =>
+        a.payload.doc.data() as ICategory)
+      )
+    );
   }
 }

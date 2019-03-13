@@ -36,6 +36,12 @@ export function listReducer(listState = defaultListState, action: Action): ListS
         loading: false
       };
 
+    case eventListActions.FILTER_EVENTS:
+      return <ListState>{
+        ...listState,
+        loading: true
+      };
+
     default: {
       return <ListState>listState;
     }
