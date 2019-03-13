@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ListState } from '../core/store/event-list/event-list.reducer';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+
 import * as listActions from '../core/store/event-list/event-list.actions';
+import { FiltersService } from '../core/services/filters.service';
+import { ListState } from '../core/store/event-list/event-list.reducer';
+import { ILocation } from '../core/models/location.interface';
+import { ICategory } from '../core/models/category.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,17 +17,28 @@ import * as listActions from '../core/store/event-list/event-list.actions';
 export class DashboardComponent implements OnInit {
 
   events$: Observable<any>;
+  locations$: Observable<Array<ILocation>>;
+  categories$: Observable<Array<ICategory>>;
 
-  constructor(private store: Store<ListState>) {
+
+  constructor(private store: Store<ListState>,
+              private filters: FiltersService) {
   }
 
   ngOnInit() {
-    this.events$ = this.store.select('listState', 'list').pipe(
-      tap(data => {
-        console.log(data);
-      })
-    );
+    this.locations$ = this.filters.locations;
+    this.categories$ = this.filters.categories;
 
+    this.events$ = this.store.select('listState', 'list');
     this.store.dispatch(new listActions.GetEvents());
+  }
+
+  onSelectCategories(categories) {
+    // this.filters.filterEvents({categories});
+  }
+
+  onSelectLocations(locations) {
+    // this.filters.filterEvents({locations});
+
   }
 }

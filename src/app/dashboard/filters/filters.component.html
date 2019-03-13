@@ -1,22 +1,25 @@
 <div class="filters">
-  <div class="ui container">
-    
-    <!--<span class="filter-label">City</span>-->
-    <div class="filters__city">
-      <button *ngFor="let city of cities" class="ui button circular">{{city.name}}</button>
+    <div class="ui container">
+
+        <!--<span class="filter-label">City</span>-->
+        <div class="filters__city">
+            <button *ngFor="let city of cities"
+                    (click)="onLocationClick(city.name)"
+                    class="ui button circular">{{city.name}}</button>
+        </div>
+
+        <!--<span class="filter-label">Event type</span>-->
+        <div class="filters__event-type">
+            <button *ngFor="let eventType of events"
+                    class="ui button circular icon"
+                    [ngClass]="eventType.color"
+                    (click)="onCategoryClick(eventType.name)"
+                    popupText="{{eventType.name}}"
+                    popupPlacement="bottom"
+                    suiPopup>
+                <i class="icon" [ngClass]="eventType.icon"></i>
+            </button>
+        </div>
+
     </div>
-    
-    <!--<span class="filter-label">Event type</span>-->
-    <div class="filters__event-type">
-      <button *ngFor="let eventType of events"
-              class="ui button circular icon"
-              [ngClass]="eventType.color"
-              popupText="{{eventType.name}}"
-              popupPlacement="bottom"
-              suiPopup>
-        <i class="icon" [ngClass]="eventType.icon"></i>
-      </button>
-    </div>
-  
-  </div>
 </div>

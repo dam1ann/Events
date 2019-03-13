@@ -1,3 +1,5 @@
-<app-filters></app-filters>
+<app-filters [cities]="locations$ | async"
+             [events]="categories$ | async"
+             (selectCategory)="onSelectCategories($event)"
+             (selectLocation)="onSelectLocations($event)"></app-filters>
 <app-events-list [events]="events$ | async "></app-events-list>
-<router-outlet></router-outlet>
