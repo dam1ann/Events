@@ -1,20 +1,19 @@
-import * as userActions from './user.actions';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-
-import { User } from '../../models/user.interface';
-import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
+import * as firebase from 'firebase';
+
+import * as userActions from './user.actions';
+import { User } from '../../models/user.interface';
 
 export type Action = userActions.All;
 
 @Injectable()
 export class UserEffects {
-  constructor(private actions: Actions, private afAuth: AngularFireAuth) {
-
+  constructor(private actions: Actions,
+              private afAuth: AngularFireAuth) {
   }
 
   @Effect()
@@ -39,7 +38,7 @@ export class UserEffects {
   googleLogin: Observable<Action> = this.actions.pipe(
     ofType(userActions.GOOGLE_LOGIN),
     map((action: userActions.GoogleLogin) => action.payload),
-    switchMap(this._googleLogin),
+    switchMap(() => this._googleLogin()),
     map(credential => new userActions.GetUser()),
     catchError(err => of(new userActions.AuthError({error: err.message})))
   );
@@ -48,7 +47,7 @@ export class UserEffects {
   facebookLogin: Observable<Action> = this.actions.pipe(
     ofType(userActions.FACEBOOK_LOGIN),
     map((action: userActions.FacebookLogin) => action.payload),
-    switchMap(this._facebookLogin),
+    switchMap(() => this._facebookLogin()),
     map(credential => new userActions.GetUser()),
     catchError(err => of(new userActions.AuthError({error: err.message})))
   );

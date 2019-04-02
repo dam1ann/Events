@@ -1,11 +1,12 @@
 import * as eventCreatorActions from './event-creator.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { from, Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { IEvent } from '../../models/event.interface';
 import { Store } from '@ngrx/store';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IEvent } from '../../models/event.interface';
 
 export type Action = eventCreatorActions.All;
 
@@ -16,6 +17,8 @@ export class EventCreatorEffects {
 
   constructor(private actions: Actions,
               private store: Store<any>,
+              private router: Router,
+              private route: ActivatedRoute,
               private afs: AngularFirestore) {
 
     this.eventsRef = afs.collection<IEvent>('events');
@@ -26,6 +29,7 @@ export class EventCreatorEffects {
     ofType(eventCreatorActions.CHECK_NAME),
     map((action: eventCreatorActions.CheckName) => action.payload),
     switchMap(({title}: IEvent) => this._correctEventTitle(title)),
+    switchMap(() => this._navigate('second')),
     map(() => new eventCreatorActions.NameValid()),
     catchError(err => of(new eventCreatorActions.NameError({error: err.message})))
   );
@@ -36,6 +40,7 @@ export class EventCreatorEffects {
     ofType(eventCreatorActions.CHECK_MORE_INFO),
     map((action: eventCreatorActions.CheckMoreInfo) => action.payload),
     switchMap((data) => this._checkMoreInfo(data)),
+    switchMap(() => this._navigate('third')),
     map(() => new eventCreatorActions.SecondStepSuccess()),
     catchError(err => of(new eventCreatorActions.SecondStepError({error: err.message})))
   );
@@ -72,8 +77,6 @@ export class EventCreatorEffects {
         return of(true);
       })
     );
-
-    // return of(true);
   }
 
   private _createEvent(data): Observable<any> {
@@ -90,5 +93,14 @@ export class EventCreatorEffects {
         return true;
       })
     );
+  }
+
+  private _navigate(path: string): Observable<any> {
+
+    const url = this.router.routerState.snapshot.url;
+    const newUrl = url.substring(0, url.lastIndexOf('/'));
+    console.log(newUrl);
+
+    return of(this.router.navigate([`${newUrl}/${path}`]));
   }
 }

@@ -46,17 +46,17 @@ export class FirstStepComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('test');
-    this.creatorStore$ = this.store.select('creatorState').pipe(
-      tap(state => {
-        if (state && !state.loading && !state.error && this.state && this.state.loading) {
-          return this.router.navigate(['../second'], {relativeTo: this.route});
-        }
-        if (state && state.event.title) {
-          this.name = state.event.title;
-        }
-        this.state = state;
-      })
-    );
+    // this.creatorStore$ = this.store.select('creatorState').pipe(
+    //   tap(state => {
+    //     if (state && !state.loading && !state.error && this.state && this.state.loading) {
+    //       return this.router.navigate(['../second'], {relativeTo: this.route});
+    //     }
+    //     if (state && state.event.title) {
+    //       this.name = state.event.title;
+    //     }
+    //     this.state = state;
+    //   })
+    // );
 
     this.api.getCategories().subscribe(data => this.categories = data);
     this.selectedCategories = [];

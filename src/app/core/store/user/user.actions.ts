@@ -77,4 +77,12 @@ export class Logout implements Action {
   }
 }
 
-export type All = GetUser | Authenticated | NotAuthenticated | GoogleLogin | FacebookLogin | AuthError | Logout;
+export type All =
+  GetUser |
+  Authenticated |
+  NotAuthenticated |
+  GoogleLogin |
+  FacebookLogin |
+  EmailLogin |
+  AuthError |
+  Logout;

@@ -31,6 +31,7 @@ export class EventCreatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('init creator');
     setTimeout(() => {
       this.open();
       this.modal.onDeny(() => this.onDeny());

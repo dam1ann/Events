@@ -36,9 +36,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user$ = this.userStore.select('user')
+    this.user$ = this.userStore.select('userState')
       .pipe(tap(user => {
-        if (user.uid) {
+        if (user && user.uid) {
           this.modal.destroy();
         }
       }));

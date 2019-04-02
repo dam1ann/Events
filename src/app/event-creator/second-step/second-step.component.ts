@@ -53,15 +53,15 @@ export class SecondStepComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.creatorStore$ = this.store.select('creatorState').pipe(
-      tap(state => {
-        if (state && !state.loading && !state.error && this.state && this.state.loading) {
-          return this.router.navigate(['../third'], {relativeTo: this.route});
-        }
-
-        this.state = state;
-      })
-    );
+    // this.creatorStore$ = this.store.select('creatorState').pipe(
+    //   tap(state => {
+    //     if (state && !state.loading && !state.error && this.state && this.state.loading) {
+    //       return this.router.navigate(['../third'], {relativeTo: this.route});
+    //     }
+    //
+    //     this.state = state;
+    //   })
+    // );
 
     this.api.getLocations().subscribe(data => {
       this.locations = data;
