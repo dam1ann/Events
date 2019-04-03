@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarModule } from './navbar/navbar.module';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -24,8 +23,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     ReactiveFormsModule,
     CoreModule.forRoot(),
     AppRoutingModule,
-    NavbarModule,
-    StoreRouterConnectingModule.forRoot()
+    NavbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

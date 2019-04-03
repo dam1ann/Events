@@ -4,16 +4,28 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './dashboard/dashboard.module#DashboardModule'
+    loadChildren: './dashboard/dashboard.module#DashboardModule',
+    data: {
+      title: ''
+    }
   }, {
     path: 'event',
-    loadChildren: './event/event.module#EventModule'
+    loadChildren: './event/event.module#EventModule',
+    data: {
+      title: 'Sample event'
+    }
   }, {
     path: 'account',
-    loadChildren: './account/account.module#AccountModule'
+    loadChildren: './account/account.module#AccountModule',
+    data: {
+      title: 'Account'
+    }
   }, {
     path: 'settings',
-    loadChildren: './settings/settings.module#SettingsModule'
+    loadChildren: './settings/settings.module#SettingsModule',
+    data: {
+      title: 'Settings'
+    }
   }
 ];
 
