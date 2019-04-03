@@ -99,8 +99,6 @@ export class EventCreatorEffects {
 
     const url = this.router.routerState.snapshot.url;
     const newUrl = url.substring(0, url.lastIndexOf('/'));
-    console.log(newUrl);
-
     return of(this.router.navigate([`${newUrl}/${path}`]));
   }
 }

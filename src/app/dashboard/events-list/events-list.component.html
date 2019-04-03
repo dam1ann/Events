@@ -5,7 +5,8 @@
       
       <a *ngFor="let event of events"
          class="ui card"
-         routerLink="/event/{{event.title}}">
+         [routerLink]="['/event']"
+         [queryParams]="{title: event.title}">
         <div class="content">
           <div class="header">{{event.title}}</div>
           <div class="meta">

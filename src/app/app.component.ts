@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
       mergeMap(route => route.data)
     ).subscribe(event => {
       this.titleService.setTitle(`Events${event['title'] ? ' - ' + event['title'] : ''}`);
-      console.log('NavigationEnd: ', event);
     });
   }
 }

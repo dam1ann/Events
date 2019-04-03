@@ -6,6 +6,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { IEvent } from '../../models/event.interface';
 import * as firebase from 'firebase';
+import { tap } from 'rxjs/internal/operators/tap';
 
 export type Action = eventListActions.All;
 
@@ -21,12 +22,31 @@ export class EventListEffects {
 
     this.categoryFilter$ = new BehaviorSubject([]);
     this.locationFilter$ = new BehaviorSubject([]);
+    this.events = this._getEvents();
+  }
 
-    this.events = combineLatest(
-      this.categoryFilter$,
-      this.locationFilter$
-    ).pipe(
-      switchMap(([categories, locations]) => afs.collection('events', ref => {
+  @Effect()
+  getEvents: Observable<Action> = this.actions.pipe(
+    ofType(eventListActions.GET_EVENTS),
+    map((action: eventListActions.GetEvents) => action.payload),
+    switchMap(() => this.events),
+    map(data => new eventListActions.FetchSuccess(data)),
+    catchError(err => of(new eventListActions.FetchError({error: err.message})))
+  );
+
+  @Effect()
+  filterEvents: Observable<Action> = this.actions.pipe(
+    ofType(eventListActions.FILTER_EVENTS),
+    map((action: eventListActions.FilterEevnts) => action.payload),
+    switchMap((filters) => this._filterEvents(filters)),
+    map(() => new eventListActions.GetEvents()),
+    catchError(err => of(new eventListActions.FetchError({error: err.message})))
+  );
+
+
+  private _getEvents(): Observable<Array<IEvent>> {
+    return combineLatest(this.categoryFilter$, this.locationFilter$).pipe(
+      switchMap(([categories, locations]) => this.afs.collection('events', ref => {
         let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
 
         if (categories.length) {
@@ -43,29 +63,6 @@ export class EventListEffects {
         return query;
       }).valueChanges())
     );
-  }
-
-  @Effect()
-  getEvents: Observable<Action> = this.actions.pipe(
-    ofType(eventListActions.GET_EVENTS),
-    map((action: eventListActions.GetEvents) => action.payload),
-    switchMap(() => this._getEvents()),
-    map(data => new eventListActions.FetchSuccess(data)),
-    catchError(err => of(new eventListActions.FetchError({error: err.message})))
-  );
-
-  @Effect()
-  filterEvents: Observable<Action> = this.actions.pipe(
-    ofType(eventListActions.FILTER_EVENTS),
-    map((action: eventListActions.FilterEevnts) => action.payload),
-    switchMap((filters) => this._filterEvents(filters)),
-    map(() => new eventListActions.GetEvents()),
-    catchError(err => of(new eventListActions.FetchError({error: err.message})))
-  );
-
-
-  private _getEvents(): Observable<Array<IEvent>> {
-    return this.events;
   }
 
   private _filterEvents({locations, categories}): Observable<any> {
