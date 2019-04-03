@@ -8,8 +8,8 @@ export interface ListState {
   loading: boolean;
 }
 
-const defaultListState = {
-  list: <IEvent>[],
+const defaultListState: ListState = {
+  list: [],
   loading: false
 };
 

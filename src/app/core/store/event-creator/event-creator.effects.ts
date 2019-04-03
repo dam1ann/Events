@@ -2,7 +2,7 @@ import * as eventCreatorActions from './event-creator.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
