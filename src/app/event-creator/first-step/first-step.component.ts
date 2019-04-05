@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
 import { CreatorState } from '../../core/store/event-creator/event-creator.reducer';
-import { ApiService } from '../../core/services/api.service';
+import { FiltersService } from '../../core/services/filters.service';
+import { ICategory } from '../../core/models/category.interface';
 
 
 @Component({
@@ -18,13 +17,10 @@ import { ApiService } from '../../core/services/api.service';
 })
 export class FirstStepComponent implements OnInit, OnDestroy {
 
-
-  header = 'Add new event';
-  categories: Array<any>;
-  selectedCategories: Array<any>;
-  creatorStore$: Observable<any>;
+  categories$: Observable<Array<ICategory>>;
+  selectedCategories: Array<ICategory>;
   firstStepForm: FormGroup;
-
+  loading: Observable<boolean>;
 
   get name(): FormControl {
     return this.firstStepForm.get('name') as FormControl;
@@ -34,44 +30,31 @@ export class FirstStepComponent implements OnInit, OnDestroy {
     this.firstStepForm.get('name').setValue(value);
   }
 
-  private state;
-
-  constructor(private router: Router,
-              private api: ApiService,
-              private route: ActivatedRoute,
-              private store: Store<CreatorState>,
+  constructor(private store: Store<CreatorState>,
+              private filters: FiltersService,
               private fb: FormBuilder) {
-    console.log('init constructor');
   }
 
   ngOnInit() {
-    console.log('test');
-    // this.creatorStore$ = this.store.select('creatorState').pipe(
-    //   tap(state => {
-    //     if (state && !state.loading && !state.error && this.state && this.state.loading) {
-    //       return this.router.navigate(['../second'], {relativeTo: this.route});
-    //     }
-    //     if (state && state.event.title) {
-    //       this.name = state.event.title;
-    //     }
-    //     this.state = state;
-    //   })
-    // );
-
-    this.api.getCategories().subscribe(data => this.categories = data);
+    this.categories$ = this.filters.categories;
+    this.loading = this.store.select('creatorState', 'loading');
     this.selectedCategories = [];
     this.firstStepForm = this.fb.group({
       name: []
     });
   }
 
-
   ngOnDestroy(): void {
   }
 
 
-  selectCategory(category) {
-
+  /**
+   * Select new category
+   * If category exist in array of categories remove these category
+   * Otherwise add category to list
+   * @param category
+   */
+  selectCategory(category: ICategory) {
     if (this.categoryExist(category)) {
       this.selectedCategories = this.selectedCategories.reduce((all, curr) => {
         if (curr.name !== category.name) {
@@ -85,12 +68,19 @@ export class FirstStepComponent implements OnInit, OnDestroy {
     }
   }
 
-  categoryExist(category): boolean {
-    return this.selectedCategories.find(cat => cat.name === category.name);
+  /**
+   * Return true if category exist in array of categories
+   * @param category
+   */
+  categoryExist(category: ICategory): boolean {
+    return !!(this.selectedCategories.find(cat => cat.name === category.name));
   }
 
-  async onNext() {
-    await this.store.dispatch(new eventCreatorActions.CheckName({
+  /**
+   * Check category name exist in database before go next
+   */
+  onNext() {
+    this.store.dispatch(new eventCreatorActions.CheckName({
       title: this.name.value || '',
       categories: this.selectedCategories.map(cat => cat.name) || []
     }));

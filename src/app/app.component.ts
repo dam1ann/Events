@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    // change title using last child data
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(() => this.activatedRoute),

@@ -2,20 +2,19 @@ import * as eventListActions from './event-list.actions';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, delay, map, switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { IEvent } from '../../models/event.interface';
 import * as firebase from 'firebase';
-import { tap } from 'rxjs/internal/operators/tap';
 
 export type Action = eventListActions.All;
 
 @Injectable()
 export class EventListEffects {
 
-  events: Observable<Array<IEvent>>;
-  categoryFilter$: BehaviorSubject<Array<string>>;
-  locationFilter$: BehaviorSubject<Array<string>>;
+  private readonly events: Observable<Array<IEvent>>;
+  private readonly categoryFilter$: BehaviorSubject<Array<string>>;
+  private readonly locationFilter$: BehaviorSubject<Array<string>>;
 
   constructor(private actions: Actions,
               private afs: AngularFirestore) {
@@ -31,6 +30,7 @@ export class EventListEffects {
     map((action: eventListActions.GetEvents) => action.payload),
     switchMap(() => this.events),
     map(data => new eventListActions.FetchSuccess(data)),
+    delay(300),
     catchError(err => of(new eventListActions.FetchError({error: err.message})))
   );
 

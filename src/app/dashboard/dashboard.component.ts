@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -7,6 +7,7 @@ import { FiltersService } from '../core/services/filters.service';
 import { ListState } from '../core/store/event-list/event-list.reducer';
 import { ILocation } from '../core/models/location.interface';
 import { ICategory } from '../core/models/category.interface';
+import { IEvent } from '../core/models/event.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +15,9 @@ import { ICategory } from '../core/models/category.interface';
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
-  events$: Observable<any>;
+  events$: Observable<Array<IEvent>>;
   locations$: Observable<Array<ILocation>>;
   categories$: Observable<Array<ICategory>>;
 
@@ -33,11 +34,11 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(new listActions.GetEvents());
   }
 
-  onSelectCategories(categories) {
-    this.store.dispatch(new listActions.FilterEevnts({categories}));
+  ngOnDestroy() {
+    this.store.dispatch(new listActions.ClearState());
   }
 
-  onSelectLocations(locations) {
-    this.store.dispatch(new listActions.FilterEevnts({locations}));
+  onFilter(filters) {
+    this.store.dispatch(new listActions.FilterEevnts(filters));
   }
 }

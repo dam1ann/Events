@@ -4,6 +4,7 @@ export const GET_EVENTS = '[Dashboard] Fetching data';
 export const FETCH_SUCCESS = '[Dashboard] Fetch success';
 export const FETCH_ERROR = '[Dashboard] Fetch error';
 export const FILTER_EVENTS = '[Dashboard] Filtering events';
+export const CLEAR_STATE = '[Dashboard] Clear state';
 
 
 export class GetEvents implements Action {
@@ -36,5 +37,13 @@ export class FilterEevnts implements Action {
   }
 }
 
+export class ClearState implements Action {
+  readonly type = CLEAR_STATE;
 
-export type All = GetEvents | FetchError | FetchSuccess | FilterEevnts;
+  constructor(public payload?: any) {
+
+  }
+}
+
+
+export type All = GetEvents | FetchError | FetchSuccess | FilterEevnts | ClearState;

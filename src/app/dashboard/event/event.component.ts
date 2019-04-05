@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { IEvent } from '../../core/models/event.interface';
 
 @Component({
   selector: 'app-event',
@@ -8,7 +9,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class EventComponent implements OnInit {
 
-  constructor() { }
+  @Input() event: IEvent;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

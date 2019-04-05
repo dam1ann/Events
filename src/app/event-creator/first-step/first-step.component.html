@@ -1,6 +1,6 @@
 <div class="ui segment firstStep"
-     [class.loading]="(creatorStore$ | async)?.loading">
-  <div class="header">{{header}}</div>
+     [class.loading]="(loading| async)">
+  <div class="header">Add new event</div>
   <div class="content">
     <div class="ui section padded">
       
@@ -19,7 +19,7 @@
         
         <div class="field ">
           <label>Event type</label>
-          <button *ngFor="let category of categories"
+          <button *ngFor="let category of categories$ | async"
                   class="ui button circular icon "
                   [ngClass]="category.color"
                   [class.basic]="!categoryExist(category)"

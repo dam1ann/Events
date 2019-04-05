@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ILocation } from '../models/location.interface';
 import { ICategory } from '../models/category.interface';
-import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -11,31 +10,22 @@ import { map } from 'rxjs/operators';
 })
 export class FiltersService {
 
-  readonly _locations$: Observable<Array<ILocation>>;
-  readonly _categories$: Observable<Array<ICategory>>;
+  private readonly _locations$: BehaviorSubject<Array<ILocation>>;
+  private readonly _categories$: BehaviorSubject<Array<ICategory>>;
 
   get locations() {
-    return this._locations$;
+    return this._locations$ as Observable<Array<ILocation>>;
   }
 
   get categories() {
-    return this._categories$;
+    return this._categories$ as Observable<Array<ICategory>>;
   }
 
   constructor(private afs: AngularFirestore) {
-    const locationsCollection: AngularFirestoreCollection<ILocation> = this.afs.collection('locations');
-    const categoriesCollection: AngularFirestoreCollection<ICategory> = this.afs.collection('categories');
+    this._locations$ = new BehaviorSubject([]);
+    this._categories$ = new BehaviorSubject([]);
 
-    this._locations$ = locationsCollection.valueChanges();
-    this._categories$ = categoriesCollection.valueChanges();
-  }
-
-  getCategory(name): Observable<Array<ICategory>> {
-    const collection: AngularFirestoreCollection<ICategory> = this.afs.collection('categories');
-    return collection.snapshotChanges().pipe(
-      map(actions => actions.map(a =>
-        a.payload.doc.data() as ICategory)
-      )
-    );
+    this.afs.collection('locations').valueChanges().subscribe(this._locations$);
+    this.afs.collection('categories').valueChanges().subscribe(this._categories$);
   }
 }

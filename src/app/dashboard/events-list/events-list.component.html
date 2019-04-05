@@ -1,29 +1,22 @@
-<div class="events-list">
+<ng-container *ngIf="events.length; else loading">
   <div class="ui container">
     <div class="ui four cards">
-      
-      
-      <a *ngFor="let event of events"
-         class="ui card"
-         [routerLink]="['/event']"
-         [queryParams]="{title: event.title}">
-        <div class="content">
-          <div class="header">{{event.title}}</div>
-          <div class="meta">
-            <span class="category">{{event.venue}}</span>
-          </div>
-          <div class="description">
-            <img src="../../../assets/images/paragraph.png" class="ui wireframe image" alt="">
-          </div>
-        </div>
-        <div class="extra content">
-          <div class="right floated author">
-            <img src="../../../assets/images/square-image.png" class="ui avatar image" alt="">
-            <img src="../../../assets/images/square-image.png" class="ui avatar image" alt="">
-          </div>
-        </div>
-      </a>
+      <app-event *ngFor="let event of events"
+                 class="ui card"
+                 [event]="event"
+                 [routerLink]="['/event']"
+                 [queryParams]="{title: event.title}">
+      </app-event>
     </div>
-  
   </div>
-</div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="ui loading segment">
+    <p></p>
+    <p></p>
+  </div>
+</ng-template>
+  
+
+

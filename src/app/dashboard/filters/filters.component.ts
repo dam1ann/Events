@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ICategory } from '../../core/models/category.interface';
+import { ILocation } from '../../core/models/location.interface';
 
 
 @Component({
@@ -9,11 +11,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 })
 export class FiltersComponent implements OnInit {
 
-  @Input() events: Array<Object>;
-  @Input() cities: Array<Object>;
-
-  @Output() selectLocation = new EventEmitter();
-  @Output() selectCategory = new EventEmitter();
+  @Input() categories: Array<ICategory>;
+  @Input() locations: Array<ILocation>;
+  @Output() filter = new EventEmitter();
 
   private _selectedLocations: Array<any>;
   private _selectedCategories: Array<any>;
@@ -49,7 +49,7 @@ export class FiltersComponent implements OnInit {
       this._selectedCategories = [...this._selectedCategories, category];
     }
 
-    this.selectCategory.next(this._selectedCategories);
+    this.filter.next({categories: this._selectedCategories});
   }
 
   onLocationClick(location) {
@@ -66,10 +66,7 @@ export class FiltersComponent implements OnInit {
       this._selectedLocations = [...this._selectedLocations, location];
     }
 
-    this.selectLocation.next(this._selectedLocations);
+    this.filter.next({locations: this._selectedLocations});
 
   }
-
-
-
 }

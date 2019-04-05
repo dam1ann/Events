@@ -1,17 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { ApiService } from '../../core/services/api.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
 import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
-import { AppState } from '../../core/store';
-import { UserState } from '../../core/store/user/user.reducer';
 import { CreatorState } from '../../core/store/event-creator/event-creator.reducer';
-
-
+import { FiltersService } from '../../core/services/filters.service';
+import { ILocation } from '../../core/models/location.interface';
 
 
 @Component({
@@ -22,10 +18,9 @@ import { CreatorState } from '../../core/store/event-creator/event-creator.reduc
 })
 export class SecondStepComponent implements OnInit {
 
-  locations: Array<any>;
-  creatorStore$: Observable<any>;
+  locations$: Observable<Array<ILocation>>;
+  loading: Observable<boolean>;
   moreInfoForm: FormGroup;
-  state;
 
   get venue(): FormControl {
     return this.moreInfoForm.get('venue') as FormControl;
@@ -44,29 +39,16 @@ export class SecondStepComponent implements OnInit {
   }
 
 
-  constructor(private router: Router,
-              private lc: Location,
-              private api: ApiService,
+  constructor(private browserLocation: Location,
               private fb: FormBuilder,
               private store: Store<CreatorState>,
-              private route: ActivatedRoute) {
+              private filters: FiltersService
+  ) {
   }
 
   ngOnInit() {
-    // this.creatorStore$ = this.store.select('creatorState').pipe(
-    //   tap(state => {
-    //     if (state && !state.loading && !state.error && this.state && this.state.loading) {
-    //       return this.router.navigate(['../third'], {relativeTo: this.route});
-    //     }
-    //
-    //     this.state = state;
-    //   })
-    // );
-
-    this.api.getLocations().subscribe(data => {
-      this.locations = data;
-    });
-
+    this.locations$ = this.filters.locations;
+    this.loading = this.store.select('creatorState', 'loading');
     this.moreInfoForm = this.fb.group({
       venue: [],
       address: [],
@@ -85,6 +67,6 @@ export class SecondStepComponent implements OnInit {
   }
 
   async onBack() {
-    this.lc.back();
+    this.browserLocation.back();
   }
 }

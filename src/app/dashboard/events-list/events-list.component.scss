@@ -1,4 +1,9 @@
-.events-list{
-  background: #F3F6F8;
+.events-list {
   min-height: 2000px;
+}
+
+.ui.loading.segment {
+  height: 200px;
+  border: none !important;
+  box-shadow: none !important;
 }

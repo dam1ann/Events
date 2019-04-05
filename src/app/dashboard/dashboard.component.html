@@ -1,5 +1,5 @@
-<app-filters [cities]="locations$ | async"
-             [events]="categories$ | async"
-             (selectCategory)="onSelectCategories($event)"
-             (selectLocation)="onSelectLocations($event)"></app-filters>
+<app-filters [locations]="locations$ | async"
+             [categories]="categories$ | async"
+             (filter)="onFilter($event)"></app-filters>
+
 <app-events-list [events]="events$ | async "></app-events-list>
