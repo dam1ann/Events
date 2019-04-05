@@ -6,11 +6,13 @@ export type Action = EventCreatorActions.All;
 export interface CreatorState {
   event: IEvent;
   loading: boolean;
+  finished: boolean;
 }
 
 const defaultCreatorState = {
   event: <IEvent>{},
-  loading: false
+  loading: false,
+  finished: false
 };
 
 
@@ -33,12 +35,6 @@ export function creatorReducer(eventState = defaultCreatorState, action: Action)
         loading: false
       };
 
-    case EventCreatorActions.NAME_ERROR:
-      return {
-        ...eventState,
-        loading: false
-      };
-
     case EventCreatorActions.CHECK_MORE_INFO:
       return {
         ...eventState,
@@ -54,12 +50,6 @@ export function creatorReducer(eventState = defaultCreatorState, action: Action)
         loading: false
       };
 
-    case EventCreatorActions.SECOND_STEP_ERROR:
-      return {
-        ...eventState,
-        loading: false
-      };
-
     case EventCreatorActions.CREATE_EVENT:
       return {
         ...eventState,
@@ -69,14 +59,15 @@ export function creatorReducer(eventState = defaultCreatorState, action: Action)
     case EventCreatorActions.CREATE_EVENT_SUCCESS:
       return {
         ...eventState,
-        loading: false
+        loading: false,
+        finished: true
       };
 
-    case EventCreatorActions.CREATE_EVENT_ERROR:
-      return {
-        ...eventState,
-        loading: false
-      };
+    case EventCreatorActions.HTTP_ERROR:
+      return defaultCreatorState;
+
+    case EventCreatorActions.CLEAR_STATE:
+      return defaultCreatorState;
 
     default: {
       return eventState;

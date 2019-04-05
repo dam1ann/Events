@@ -1,14 +1,13 @@
 import { Action } from '@ngrx/store';
 
 export const CHECK_NAME = '[Event creator] Check event title';
-export const NAME_ERROR = '[Event creator] Event title already exist';
 export const NAME_VALID = '[Event creator] Correct event title';
 export const CHECK_MORE_INFO = '[Event creator] Check more info';
 export const SECOND_STEP_SUCCESS = '[Event creator] Second step success';
-export const SECOND_STEP_ERROR = '[Event creator] Second step success';
 export const CREATE_EVENT = '[Event creator] Creating event';
 export const CREATE_EVENT_SUCCESS = '[Event creator] Event succesfully craeted';
-export const CREATE_EVENT_ERROR = '[Event creator] Event cration error';
+export const HTTP_ERROR = '[Event creator] Http Error :(';
+export const CLEAR_STATE = '[Event creator] Clear state';
 
 
 export class CheckName implements Action {
@@ -18,14 +17,6 @@ export class CheckName implements Action {
   }
 }
 
-
-export class NameError implements Action {
-  readonly type = NAME_ERROR;
-
-  constructor(public payload?: any) {
-
-  }
-}
 
 export class NameValid implements Action {
   readonly type = NAME_VALID;
@@ -51,14 +42,6 @@ export class SecondStepSuccess implements Action {
   }
 }
 
-export class SecondStepError implements Action {
-  readonly type = SECOND_STEP_ERROR;
-
-  constructor(public payload?: any) {
-
-  }
-}
-
 
 export class CreateEvent implements Action {
   readonly type = CREATE_EVENT;
@@ -75,23 +58,30 @@ export class CreateEventSuccess implements Action {
   }
 }
 
-export class CreateEventError implements Action {
-  readonly type = CREATE_EVENT_ERROR;
+
+export class HttpError implements Action {
+  readonly type = HTTP_ERROR;
 
   constructor(public payload?: any) {
 
   }
+}
 
+export class ClearState implements Action {
+  readonly type = CLEAR_STATE;
+
+  constructor(public payload?: any) {
+
+  }
 }
 
 
 export type All =
   CheckName |
-  NameError |
   NameValid |
-  SecondStepError |
   CheckMoreInfo |
   SecondStepSuccess |
   CreateEvent |
   CreateEventSuccess |
-  CreateEventError;
+  HttpError |
+  ClearState;

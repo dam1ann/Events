@@ -1,5 +1,5 @@
 <div class="ui basic segment"
-     [class.loading]="loading | async)">
+     [class.loading]="loading | async">
   
   <div class="header">Choose more info about your event</div>
   <div class="content">
@@ -23,7 +23,7 @@
               <sui-select placeholder="Choose city"
                           class="ui selection fluid"
                           formControlName="location">
-                <sui-select-option *ngFor="let loc of locations"
+                <sui-select-option *ngFor="let loc of locations$ | async "
                                    [value]="loc.name"></sui-select-option>
               </sui-select>
             </div>

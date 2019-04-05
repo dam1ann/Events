@@ -42,8 +42,7 @@ export class SecondStepComponent implements OnInit {
   constructor(private browserLocation: Location,
               private fb: FormBuilder,
               private store: Store<CreatorState>,
-              private filters: FiltersService
-  ) {
+              private filters: FiltersService) {
   }
 
   ngOnInit() {
@@ -57,7 +56,7 @@ export class SecondStepComponent implements OnInit {
     });
   }
 
-  async onNext() {
+  onNext() {
     this.store.dispatch(new eventCreatorActions.CheckMoreInfo({
       venue: this.venue.value || '',
       address: this.address.value || '',
@@ -66,7 +65,7 @@ export class SecondStepComponent implements OnInit {
     }));
   }
 
-  async onBack() {
+  onBack() {
     this.browserLocation.back();
   }
 }

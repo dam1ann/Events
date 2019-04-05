@@ -24,6 +24,8 @@ export class ThirdStepComponent implements OnInit {
   }
 
   async onFinish() {
+
+
     await this.store.dispatch(new eventCreatorActions.CreateEvent());
   }
 

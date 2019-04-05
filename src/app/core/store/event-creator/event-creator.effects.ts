@@ -1,104 +1,77 @@
 import * as eventCreatorActions from './event-creator.actions';
+import {
+  CHECK_MORE_INFO,
+  CHECK_NAME,
+  CheckMoreInfo,
+  CheckName, CREATE_EVENT,
+  CreateEventSuccess, HTTP_ERROR,
+  HttpError,
+  NameValid,
+  SecondStepSuccess
+} from './event-creator.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute, Router } from '@angular/router';
 import { IEvent } from '../../models/event.interface';
+import { ToastrService } from 'ngx-toastr';
+import { EventsService } from '../../services/events.service';
+import { NavigationService } from '../../services/navigation.service';
+import { CreatorState } from './event-creator.reducer';
+import { tap } from 'rxjs/internal/operators/tap';
 
 export type Action = eventCreatorActions.All;
 
 @Injectable()
 export class EventCreatorEffects {
 
-  eventsRef: any;
-
   constructor(private actions: Actions,
-              private store: Store<any>,
-              private router: Router,
-              private route: ActivatedRoute,
-              private afs: AngularFirestore) {
-
-    this.eventsRef = afs.collection<IEvent>('events');
+              private store: Store<CreatorState>,
+              private toastr: ToastrService,
+              private events: EventsService,
+              private navigation: NavigationService) {
   }
 
   @Effect()
-  checkName: Observable<Action> = this.actions.pipe(
-    ofType(eventCreatorActions.CHECK_NAME),
-    map((action: eventCreatorActions.CheckName) => action.payload),
-    switchMap(({title}: IEvent) => this._correctEventTitle(title)),
-    switchMap(() => this._navigate('second')),
-    map(() => new eventCreatorActions.NameValid()),
-    catchError(err => of(new eventCreatorActions.NameError({error: err.message})))
+  checkName$: Observable<Action> = this.actions.pipe(
+    ofType(CHECK_NAME),
+    map((action: CheckName) => action.payload),
+    switchMap(({title}: IEvent) => this.events.titleNotExist(title)),
+    switchMap(() => this.navigation.to('second')),
+    map(() => new NameValid()),
+    catchError(err => this._handleError(err))
   );
 
 
   @Effect()
-  checkMoreInfo: Observable<Action> = this.actions.pipe(
-    ofType(eventCreatorActions.CHECK_MORE_INFO),
-    map((action: eventCreatorActions.CheckMoreInfo) => action.payload),
-    switchMap((data) => this._checkMoreInfo(data)),
-    switchMap(() => this._navigate('third')),
-    map(() => new eventCreatorActions.SecondStepSuccess()),
-    catchError(err => of(new eventCreatorActions.SecondStepError({error: err.message})))
+  checkMoreInfo$: Observable<Action> = this.actions.pipe(
+    ofType(CHECK_MORE_INFO),
+    map((action: CheckMoreInfo) => action.payload),
+    switchMap((data) => this.events.checkData(data)),
+    switchMap(() => this.navigation.to('third')),
+    map(() => new SecondStepSuccess()),
+    catchError(err => this._handleError(err))
   );
 
 
   @Effect()
-  createEvent: Observable<Action> = this.actions.pipe(
-    ofType(eventCreatorActions.CREATE_EVENT),
+  createEvent$: Observable<Action> = this.actions.pipe(
+    ofType(CREATE_EVENT),
     withLatestFrom(this.store.select('creatorState', 'event')),
-    mergeMap(data => this._createEvent(data)),
-    map(() => new eventCreatorActions.CreateEventSuccess()),
-    catchError(err => of(new eventCreatorActions.CreateEventError({error: err.message})))
+    mergeMap(eventData => this.events.create(eventData)),
+    tap(() => this._handleSuccess('event created')),
+    map(() => new CreateEventSuccess()),
+    catchError(err => this._handleError(err))
   );
 
 
-  private _checkMoreInfo(data): Observable<any> {
-    console.log(data);
-    return of(true);
+  private _handleError({message}): Observable<Action> {
+    this.toastr.error(message, 'Error');
+    return of(new HttpError({error: message}));
   }
 
-  private _correctEventTitle(title = ''): Observable<any> {
-    const collection = this.afs.collection<IEvent>('events', ref => ref.where('title', '==', title));
-
-    return collection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return {id, ...data};
-      })),
-      switchMap(data => {
-        if (!!data.length) {
-          return throwError({message: 'Title exist'});
-        }
-        return of(true);
-      })
-    );
-  }
-
-  private _createEvent(data): Observable<any> {
-
-    const event: IEvent = <IEvent>data[1];
-
-    return this._correctEventTitle(event.title).pipe(
-      map(correct => {
-        if (!correct) {
-          return throwError('Event exist');
-        }
-
-        this.eventsRef.add(event);
-        return true;
-      })
-    );
-  }
-
-  private _navigate(path: string): Observable<any> {
-
-    const url = this.router.routerState.snapshot.url;
-    const newUrl = url.substring(0, url.lastIndexOf('/'));
-    return of(this.router.navigate([`${newUrl}/${path}`]));
+  private _handleSuccess(message: string) {
+    this.toastr.success(message, 'Success');
   }
 }

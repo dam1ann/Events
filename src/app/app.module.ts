@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarModule } from './navbar/navbar.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NavbarModule } from './navbar/navbar.module';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
     CoreModule.forRoot(),
     AppRoutingModule,
     NavbarModule
