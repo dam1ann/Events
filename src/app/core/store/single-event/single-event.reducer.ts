@@ -35,6 +35,12 @@ export function singleEventReducer(eventState = defaultState, action: Action) {
         loading: false
       };
 
+    case singleEventActions.CLEAR_STATE:
+      return {
+        ...defaultState,
+        loading: false
+      };
+
     default:
       return <SingleEventState>eventState;
   }

@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { IEvent } from '../core/models/event.interface';
-import { SingleEventState } from '../core/store/single-event/single-event.reducer';
 import { Store } from '@ngrx/store';
-import * as singleEventActions from '../core/store/single-event/single-event.actions';
-import { tap } from 'rxjs/internal/operators/tap';
 import { Title } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
+import { SingleEventState } from '../core/store/single-event/single-event.reducer';
+import * as singleEventActions from '../core/store/single-event/single-event.actions';
+import { IEvent } from '../core/models/event.interface';
 
 @Component({
   selector: 'app-event',
@@ -14,7 +13,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./event.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventComponent implements OnInit {
+export class EventComponent implements OnInit, OnDestroy {
 
   event$: Observable<IEvent>;
 
@@ -27,10 +26,12 @@ export class EventComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(({title}) => {
       this.titleService.setTitle(`Events - ${title}`);
-      this.event$ = this.store.select('singleEventState', 'event').pipe(tap(data => {
-        console.log(data);
-      }));
-      this.store.dispatch(new singleEventActions.GetEvent());
+      this.event$ = this.store.select('singleEventState', 'event');
+      this.store.dispatch(new singleEventActions.GetEvent(title));
     });
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(new singleEventActions.ClearState());
   }
 }

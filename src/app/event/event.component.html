@@ -1,3 +1,11 @@
-<p>
-  event works!
-</p>
+<ng-container *ngIf="event$ | async as event; else loading ">
+    <div>
+        {{event | json}}
+    </div>
+</ng-container>
+<ng-template #loading>
+    <div class="ui loading segment">
+        <p></p>
+        <p></p>
+    </div>
+</ng-template>

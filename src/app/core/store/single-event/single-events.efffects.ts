@@ -21,7 +21,7 @@ export class SingleEventsEffects {
     ofType(singleEventActions.GET_EVENT),
     map((action: singleEventActions.GetEvent) => action.payload),
     switchMap(title => this._getEvent(title)),
-    map(() => new singleEventActions.FetchSuccess()),
+    map((event) => new singleEventActions.FetchSuccess(event)),
     catchError((err => of(new singleEventActions.FetchError({error: err}))))
   );
 
