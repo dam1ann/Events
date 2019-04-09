@@ -82,6 +82,7 @@ export class FirstStepComponent implements OnInit, OnDestroy {
   onNext() {
     this.store.dispatch(new eventCreatorActions.CheckName({
       title: this.name.value || '',
+      category: this.selectedCategories.map(cat => cat.name)[0] || {},
       categories: this.selectedCategories.map(cat => cat.name) || []
     }));
   }

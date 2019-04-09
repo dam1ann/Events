@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
-import { Observable, of, throwError, from } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { IEvent } from '../models/event.interface';
 import { map, switchMap } from 'rxjs/operators';
 import { CoreModule } from '../core.module';
@@ -45,7 +45,7 @@ export class EventsService {
 
     return this.titleNotExist(title).pipe(
       switchMap(correct => {
-        return !correct ? throwError('Event exist') : from(this.events.add(event));
+        return !correct ? throwError('Event exist') : from(this.events.add(eventData));
       })
     );
   }

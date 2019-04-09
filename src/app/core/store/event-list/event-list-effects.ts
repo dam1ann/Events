@@ -21,7 +21,7 @@ export class EventListEffects {
 
     this.categoryFilter$ = new BehaviorSubject([]);
     this.locationFilter$ = new BehaviorSubject([]);
-    this.events = this._getEvents();
+    this.events = this._getEvents().pipe(delay(1000));
   }
 
   @Effect()

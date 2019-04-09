@@ -3,8 +3,9 @@ import {
   CHECK_MORE_INFO,
   CHECK_NAME,
   CheckMoreInfo,
-  CheckName, CREATE_EVENT,
-  CreateEventSuccess, HTTP_ERROR,
+  CheckName,
+  CREATE_EVENT,
+  CreateEventSuccess,
   HttpError,
   NameValid,
   SecondStepSuccess
@@ -67,6 +68,7 @@ export class EventCreatorEffects {
 
 
   private _handleError({message}): Observable<Action> {
+    console.log(message);
     this.toastr.error(message, 'Error');
     return of(new HttpError({error: message}));
   }
