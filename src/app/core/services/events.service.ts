@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { from, Observable, of, throwError } from 'rxjs';
-import { IEvent } from '../models/event.interface';
 import { map, switchMap } from 'rxjs/operators';
-import { CoreModule } from '../core.module';
+import { IEvent } from '../models';
 
-@Injectable({
-  providedIn: CoreModule
-})
+@Injectable()
 export class EventsService {
 
   private events: AngularFirestoreCollection;

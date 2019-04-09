@@ -4,7 +4,7 @@ import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, delay, map, switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { IEvent } from '../../models/event.interface';
+import { IEvent } from '../../models';
 import * as firebase from 'firebase';
 
 export type Action = eventListActions.All;

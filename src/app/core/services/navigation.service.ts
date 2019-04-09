@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, from } from 'rxjs';
-import { CoreModule } from '../core.module';
+import { from, Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: CoreModule
-})
+@Injectable()
 export class NavigationService {
 
   constructor(private router: Router) {

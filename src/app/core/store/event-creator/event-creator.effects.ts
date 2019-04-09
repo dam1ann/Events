@@ -15,11 +15,10 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { IEvent } from '../../models/event.interface';
 import { ToastrService } from 'ngx-toastr';
-import { EventsService } from '../../services/events.service';
-import { NavigationService } from '../../services/navigation.service';
 import { CreatorState } from './event-creator.reducer';
+import { EventsService, NavigationService } from '../../services';
+import { IEvent } from '../../models';
 import { tap } from 'rxjs/internal/operators/tap';
 
 export type Action = eventCreatorActions.All;

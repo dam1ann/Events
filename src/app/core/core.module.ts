@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { UserEffects } from './store/user/user.effects';
 import { environment } from '../../environments/environment';
 import { reducers } from './store';
+import { EventsService, FiltersService, NavigationService } from './services';
 
 
 @NgModule({
@@ -29,7 +30,11 @@ import { reducers } from './store';
     })
   ],
   declarations: [],
-  providers: []
+  providers: [
+    NavigationService,
+    EventsService,
+    FiltersService
+  ]
 })
 export class CoreModule {
 
