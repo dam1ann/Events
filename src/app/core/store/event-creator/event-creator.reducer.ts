@@ -1,5 +1,5 @@
 import * as EventCreatorActions from '../event-creator/event-creator.actions';
-import { IEvent } from '../../models/event.interface';
+import { IEvent } from '../../models';
 
 export type Action = EventCreatorActions.All;
 

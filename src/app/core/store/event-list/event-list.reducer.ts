@@ -1,5 +1,5 @@
 import * as eventListActions from './event-list.actions';
-import { IEvent } from '../../models/event.interface';
+import { IEvent } from '../../models';
 
 export type Action = eventListActions.All;
 

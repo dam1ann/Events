@@ -1,5 +1,5 @@
 import * as singleEventActions from './single-event.actions';
-import { IEvent } from '../../models/event.interface';
+import { IEvent } from '../../models';
 
 export type Action = singleEventActions.All;
 
