@@ -4,7 +4,6 @@
 
 [![Build Status](https://travis-ci.org/DamianNurzynski/Events.svg?branch=master)](https://travis-ci.org/DamianNurzynski/Events)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org) 
-[![](https://img.shields.io/github/package-json/v/DamianNurzynski/Events.svg)](https://www.npmjs.com/package/ethereum-waffle) 
 
 ---
 
