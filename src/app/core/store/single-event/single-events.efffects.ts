@@ -2,7 +2,7 @@ import * as singleEventActions from './single-event.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { IEvent } from '../../models/event.interface';
+import { IEvent } from '../../models';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { AngularFirestore } from '@angular/fire/firestore';

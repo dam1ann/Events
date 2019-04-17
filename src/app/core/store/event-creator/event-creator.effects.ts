@@ -15,11 +15,10 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { IEvent } from '../../models/event.interface';
 import { ToastrService } from 'ngx-toastr';
-import { EventsService } from '../../services/events.service';
-import { NavigationService } from '../../services/navigation.service';
 import { CreatorState } from './event-creator.reducer';
+import { EventsService, NavigationService } from '../../services';
+import { IEvent } from '../../models';
 import { tap } from 'rxjs/internal/operators/tap';
 
 export type Action = eventCreatorActions.All;
@@ -49,7 +48,7 @@ export class EventCreatorEffects {
   checkMoreInfo$: Observable<Action> = this.actions.pipe(
     ofType(CHECK_MORE_INFO),
     map((action: CheckMoreInfo) => action.payload),
-    switchMap((data) => this.events.checkData(data)),
+    switchMap((data) => this.events.titleNotExist(data)),
     switchMap(() => this.navigation.to('third')),
     map(() => new SecondStepSuccess()),
     catchError(err => this._handleError(err))
@@ -68,12 +67,12 @@ export class EventCreatorEffects {
 
 
   private _handleError({message}): Observable<Action> {
-    console.log(message);
-    this.toastr.error(message, 'Error');
+    console.error(message);
+    this.toastr.error('Event creation error :/ Please try again', 'Error');
     return of(new HttpError({error: message}));
   }
 
   private _handleSuccess(message: string) {
-    this.toastr.success(message, 'Success');
+    this.toastr.success(message, 'Event created :)');
   }
 }

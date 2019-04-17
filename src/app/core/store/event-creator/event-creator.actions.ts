@@ -17,7 +17,6 @@ export class CheckName implements Action {
   }
 }
 
-
 export class NameValid implements Action {
   readonly type = NAME_VALID;
 
@@ -74,7 +73,6 @@ export class ClearState implements Action {
 
   }
 }
-
 
 export type All =
   CheckName |

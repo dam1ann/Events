@@ -3,11 +3,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import * as listActions from '../core/store/event-list/event-list.actions';
-import { FiltersService } from '../core/services/filters.service';
 import { ListState } from '../core/store/event-list/event-list.reducer';
-import { ILocation } from '../core/models/location.interface';
-import { ICategory } from '../core/models/category.interface';
-import { IEvent } from '../core/models/event.interface';
+import { ICategory, IEvent, ILocation } from '../core/models';
+import { FiltersService } from '../core/services';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +18,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   events$: Observable<Array<IEvent>>;
   locations$: Observable<Array<ILocation>>;
   categories$: Observable<Array<ICategory>>;
-
 
   constructor(private store: Store<ListState>,
               private filters: FiltersService) {

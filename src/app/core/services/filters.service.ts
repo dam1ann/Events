@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ILocation } from '../models/location.interface';
-import { ICategory } from '../models/category.interface';
+import { ICategory, ILocation } from '../models';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FiltersService {
 
   private readonly _locations$: BehaviorSubject<Array<ILocation>>;

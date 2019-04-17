@@ -1,6 +1,5 @@
 import { IUser, User } from '../../models/user.interface';
 import * as userActions from './user.actions';
-import { createSelector } from '@ngrx/store';
 
 export type Action = userActions.All;
 

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ICategory } from '../../core/models/category.interface';
-import { ILocation } from '../../core/models/location.interface';
+import { ICategory, ILocation } from '../../core/models';
 
 
 @Component({
