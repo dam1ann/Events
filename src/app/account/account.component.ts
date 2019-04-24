@@ -4,7 +4,7 @@ import { User } from '../core/models/user.interface';
 import { Observable } from 'rxjs';
 
 interface AppState {
-  user: User
+  user: User;
 }
 
 @Component({
