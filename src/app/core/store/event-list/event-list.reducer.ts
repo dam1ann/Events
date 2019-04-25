@@ -39,6 +39,7 @@ export function listReducer(listState = defaultListState, action: Action): ListS
     case eventListActions.FILTER_EVENTS:
       return <ListState>{
         ...listState,
+        list: <Array<IEvent>>[],
         loading: true
       };
 

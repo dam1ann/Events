@@ -1,4 +1,4 @@
-<ng-container *ngIf="events.length; else loading">
+<ng-container *ngIf="events.length; else noItems">
   <div class="ui container">
     <div class="ui four cards">
       <app-event *ngFor="let event of events"
@@ -10,69 +10,9 @@
     </div>
   </div>
 </ng-container>
-
-<ng-template #loading>
-  <div class="ui container">
-    <div class="ui four column stackable grid">
-      <div class="column">
-        <div class="ui raised segment">
-          <div class="ui placeholder">
-            <div class="image header">
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-            <div class="paragraph">
-              <div class="medium line"></div>
-              <div class="short line"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui raised segment">
-          <div class="ui placeholder">
-            <div class="image header">
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-            <div class="paragraph">
-              <div class="medium line"></div>
-              <div class="short line"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui raised segment">
-          <div class="ui placeholder">
-            <div class="image header">
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-            <div class="paragraph">
-              <div class="medium line"></div>
-              <div class="short line"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui raised segment">
-          <div class="ui placeholder">
-            <div class="image header">
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-            <div class="paragraph">
-              <div class="medium line"></div>
-              <div class="short line"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<ng-template #noItems>
+  No items
 </ng-template>
-  
+
 
 

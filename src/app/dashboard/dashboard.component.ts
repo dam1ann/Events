@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   events$: Observable<Array<IEvent>>;
   locations$: Observable<Array<ILocation>>;
   categories$: Observable<Array<ICategory>>;
+  loading$: Observable<Boolean>;
 
   constructor(private store: Store<ListState>,
               private filters: FiltersService) {
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.categories$ = this.filters.categories;
 
     this.events$ = this.store.select('listState', 'list');
+    this.loading$ = this.store.select('listState', 'loading');
     this.store.dispatch(new listActions.GetEvents());
   }
 
