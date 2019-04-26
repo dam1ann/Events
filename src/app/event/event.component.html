@@ -1,11 +1,244 @@
 <ng-container *ngIf="event$ | async as event; else loading ">
-    <div>
-        {{event | json}}
+  <div class="ui container">
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+    <div class="ui two column stackable grid">
+      <div class="column">
+        
+        <div class="ui middle aligned divided list">
+          <div class="item venue">
+            <div class="right floated content">
+              <p>test {{event.venue}}</p>
+            </div>
+            <div class="content">
+              Venue
+            </div>
+          </div>
+          <div class="item tags">
+            <div class="right floated content">
+              <p>{{event.tags | json}}</p>
+            </div>
+            <div class="content">
+              Tags
+            </div>
+          </div>
+          <div class="item webpage">
+            <div class="right floated content">
+              <p>www.webpage.com</p>
+            </div>
+            <div class="content">
+              Event website
+            </div>
+          </div>
+          
+          
+          <div class="item type">
+            <div class="right floated content">
+              <p>{{event.category}}</p>
+            </div>
+            <div class="content">
+              Event type
+            </div>
+          </div>
+          <div class="item location">
+            <div class="right floated content">
+              <p>{{event.location}}</p>
+            </div>
+            <div class="content">
+              Location
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <div class="ui hidden divider"></div>
+    
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi dolorem esse eveniet exercitationem
+    fuga, incidunt laboriosam magni molestiae necessitatibus nemo nobis perferendis, quos sit soluta tempora temporibus
+    vero voluptatum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi architecto, consectetur eius
+    explicabo magnam magni maxime mollitia obcaecati quia soluta. Amet dolorem esse nemo nihil odit quaerat quos sint
+    totam.
+    
+    
+    <h3 class="ui header">Map</h3>
+    <div class="ui hidden divider"></div>
+    
+    <agm-map [latitude]='latitude'
+             [longitude]='longitude'>
+    </agm-map>
+    
+    <h3 class="ui header">Notifications</h3>
+    <div class="ui hidden divider"></div>
+    
+    
+    <div class="ui small comments">
+      <h3 class="ui dividing header">Comments</h3>
+      <div class="comment">
+        <a class="avatar">
+          <img src="/images/avatar/small/matt.jpg">
+        </a>
+        <div class="content">
+          <a class="author">Matt</a>
+          <div class="metadata">
+            <span class="date">Today at 5:42PM</span>
+          </div>
+          <div class="text">
+            How artistic!
+          </div>
+          <div class="actions">
+            <a class="reply">Reply</a>
+          </div>
+        </div>
+      </div>
+      <div class="comment">
+        <a class="avatar">
+          <img src="/images/avatar/small/elliot.jpg">
+        </a>
+        <div class="content">
+          <a class="author">Elliot Fu</a>
+          <div class="metadata">
+            <span class="date">Yesterday at 12:30AM</span>
+          </div>
+          <div class="text">
+            <p>This has been very useful for my research. Thanks as well!</p>
+          </div>
+          <div class="actions">
+            <a class="reply">Reply</a>
+          </div>
+        </div>
+        <div class="comments">
+          <div class="comment">
+            <a class="avatar">
+              <img src="/images/avatar/small/jenny.jpg">
+            </a>
+            <div class="content">
+              <a class="author">Jenny Hess</a>
+              <div class="metadata">
+                <span class="date">Just now</span>
+              </div>
+              <div class="text">
+                Elliot you are always so right :)
+              </div>
+              <div class="actions">
+                <a class="reply">Reply</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="comment">
+        <a class="avatar">
+          <img src="/images/avatar/small/joe.jpg">
+        </a>
+        <div class="content">
+          <a class="author">Joe Henderson</a>
+          <div class="metadata">
+            <span class="date">5 days ago</span>
+          </div>
+          <div class="text">
+            Dude, this is awesome. Thanks so much
+          </div>
+          <div class="actions">
+            <a class="reply">Reply</a>
+          </div>
+        </div>
+      </div>
+      <form class="ui reply form">
+        <div class="field">
+          <textarea></textarea>
+        </div>
+        <div class="ui blue labeled submit icon button">
+          <i class="icon edit"></i> Add Reply
+        </div>
+      </form>
+    </div>
+    
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+    
+    <h3 class="ui header">More events</h3>
+    <div class="ui hidden divider"></div>
+    
+    <div class="ui link  stackable cards">
+      <div class="card">
+        <div class="image">
+          <img src="/images/avatar2/large/matthew.png">
+        </div>
+        <div class="content">
+          <div class="header">Matt Giampietro</div>
+          <div class="meta">
+            <a>Friends</a>
+          </div>
+          <div class="description">
+            Matthew is an interior designer living in New York.
+          </div>
+        </div>
+        <div class="extra content">
+      <span class="right floated">
+        Joined in 2013
+      </span>
+          <span>
+        <i class="user icon"></i>
+        75 Friends
+      </span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="image">
+          <img src="/images/avatar2/large/molly.png">
+        </div>
+        <div class="content">
+          <div class="header">Molly</div>
+          <div class="meta">
+            <span class="date">Coworker</span>
+          </div>
+          <div class="description">
+            Molly is a personal assistant living in Paris.
+          </div>
+        </div>
+        <div class="extra content">
+      <span class="right floated">
+        Joined in 2011
+      </span>
+          <span>
+        <i class="user icon"></i>
+        35 Friends
+      </span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="image">
+          <img src="/images/avatar2/large/elyse.png">
+        </div>
+        <div class="content">
+          <div class="header">Elyse</div>
+          <div class="meta">
+            <a>Coworker</a>
+          </div>
+          <div class="description">
+            Elyse is a copywriter working in New York.
+          </div>
+        </div>
+        <div class="extra content">
+      <span class="right floated">
+        Joined in 2014
+      </span>
+          <span>
+        <i class="user icon"></i>
+        151 Friends
+      </span>
+        </div>
+      </div>
+    </div>
+  
+  </div>
 </ng-container>
+
 <ng-template #loading>
-    <div class="ui loading segment">
-        <p></p>
-        <p></p>
-    </div>
+  <div class="ui loading segment">
+    <p></p>
+    <p></p>
+  </div>
 </ng-template>

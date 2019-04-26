@@ -13,23 +13,25 @@ import { UserEffects } from './store/user/user.effects';
 import { environment } from '../../environments/environment';
 import { reducers } from './store';
 import { EventsService, FiltersService, NavigationService } from './services';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
   imports: [
     HttpClientModule,
+    ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25
-    })
+    }),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([UserEffects]),
+
   ],
-  declarations: [],
   providers: [
     NavigationService,
     EventsService,

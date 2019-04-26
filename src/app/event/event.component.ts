@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { SingleEventState } from '../core/store/single-event/single-event.reducer';
 import * as singleEventActions from '../core/store/single-event/single-event.actions';
-import { IEvent } from '../core/models/event.interface';
+import { IEvent } from '../core/models';
 
 @Component({
   selector: 'app-event',
@@ -16,6 +16,9 @@ import { IEvent } from '../core/models/event.interface';
 export class EventComponent implements OnInit, OnDestroy {
 
   event$: Observable<IEvent>;
+  latitude = 52.13;
+  longitude = 21.00;
+  mapType = 'satellite';
 
   constructor(private router: Router,
               private route: ActivatedRoute,

@@ -11,6 +11,7 @@ import { EventComponent } from './event/event.component';
 import { FiltersComponent } from './filters/filters.component';
 import { listReducer } from '../core/store/event-list/event-list.reducer';
 import { EventListEffects } from '../core/store/event-list/event-list-effects';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EventListEffects } from '../core/store/event-list/event-list-effects';
     DashboardRoutingModule,
     SuiModule,
     StoreModule.forFeature('listState', listReducer),
-    EffectsModule.forFeature([EventListEffects])
+    EffectsModule.forFeature([EventListEffects]),
+    SharedModule
   ]
 })
 export class DashboardModule {

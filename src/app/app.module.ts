@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ToastrModule } from 'ngx-toastr';
 
 import { NavbarModule } from './navbar/navbar.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,10 +21,9 @@ import { AppComponent } from './app.component';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot(),
     CoreModule.forRoot(),
     AppRoutingModule,
-    NavbarModule
+    NavbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 
 @NgModule({
   declarations: [
-    NotfoundComponent
+    NotfoundComponent,
+    TruncatePipe
   ],
+
   imports: [
     CommonModule,
     RouterModule
   ],
-  exports: []
+  exports: [
+    TruncatePipe,
+    NotfoundComponent
+  ]
 })
 export class SharedModule {
 }

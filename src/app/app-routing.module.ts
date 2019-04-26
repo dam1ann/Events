@@ -26,6 +26,12 @@ const routes: Routes = [
     data: {
       title: 'Settings'
     }
+  }, {
+    path: 'friends',
+    loadChildren: './friends/friends.module#FriendsModule',
+    data: {
+      title: 'Friends'
+    }
   }
 ];
 

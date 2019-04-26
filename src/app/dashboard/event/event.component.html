@@ -1,6 +1,6 @@
-<ng-container  *ngIf="event">
+<ng-container *ngIf="event">
   <div class="content">
-    <div class="header">{{event.title}}</div>
+    <div class="header">{{event.title | truncate:[20] }}</div>
     <div class="meta">
       <span class="category">{{event.venue}}</span>
     </div>
