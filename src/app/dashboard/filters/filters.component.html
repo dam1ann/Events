@@ -3,36 +3,39 @@
     <div class="ui container">
       
       <span class="filter-label">City</span>
-      <div class="filters__city">
-        <button *ngFor="let location of locations"
-                [class.basic]="!locationExist(location.name)"
-                (click)="onLocationClick(location.name)"
-                class="ui button circular">{{location.name}}</button>
+      <div class="filters__city_container">
+        <div class="filters__city">
+          <button (click)="onLocationClick(location.name)"
+                  *ngFor="let location of locations"
+                  [class.basic]="!locationExist(location.name)"
+                  class="ui button circular">{{location.name}}</button>
+        </div>
       </div>
       
       <span class="filter-label">Event type</span>
-      <div class="filters__event-type">
-        <button *ngFor="let category of categories"
-                class="ui button circular icon"
-                [ngClass]="category.color"
-                [class.basic]="!categoryExist(category.name)"
-                (click)="onCategoryClick(category.name)"
-                popupText="{{category.name}}"
-                popupPlacement="bottom"
-                suiPopup>
-          <i class="icon" [ngClass]="category.icon"></i>
-        </button>
+      <div class="filters__event-type_container">
+        <div class="filters__event-type">
+          <button (click)="onCategoryClick(category.name)"
+                  *ngFor="let category of categories"
+                  [class.basic]="!categoryExist(category.name)"
+                  [ngClass]="category.color"
+                  class="ui button circular icon"
+                  popupPlacement="bottom"
+                  popupText="{{category.name}}"
+                  suiPopup>
+            <i [ngClass]="category.icon" class="icon"></i>
+          </button>
+        </div>
       </div>
-    
     </div>
   </div>
 </ng-container>
 
 <ng-template #loading>
-  <div class="ui loading segment">
-    <p></p>
-    <p></p>
-  </div>
+  <!--  <div class="ui loading segment">-->
+  <!--    <p></p>-->
+  <!--    <p></p>-->
+  <!--  </div>-->
 </ng-template>
 
 
