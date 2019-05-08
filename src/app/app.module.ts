@@ -5,10 +5,12 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { NavbarModule } from './navbar/navbar.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
+import { SuiModule } from 'ng2-semantic-ui';
+import { AccountModule } from './account/account.module';
+import { EventCreatorModule } from './event-creator/event-creator.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AppComponent } from './app.component';
     ReactiveFormsModule,
     CoreModule.forRoot(),
     AppRoutingModule,
-    NavbarModule,
+    SuiModule,
+    AccountModule,
+    EventCreatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

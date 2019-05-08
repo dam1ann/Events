@@ -4,9 +4,15 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './dashboard/dashboard.module#DashboardModule',
+    loadChildren: './home/home.module#HomeModule',
     data: {
       title: ''
+    }
+  }, {
+    path: 'dashboard',
+    loadChildren: './dashboard/dashboard.module#DashboardModule',
+    data: {
+      title: 'Dashboard'
     }
   }, {
     path: 'event',

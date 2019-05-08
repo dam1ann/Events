@@ -1,14 +1,15 @@
 <ng-container *ngIf="locations.length && categories.length; else loading">
   <div class="filters">
     <div class="ui container">
-      
+  
+  
       <span class="filter-label">City</span>
       <div class="filters__city_container">
         <div class="filters__city">
           <button (click)="onLocationClick(location.name)"
                   *ngFor="let location of locations"
                   [class.basic]="!locationExist(location.name)"
-                  class="ui button circular">{{location.name}}</button>
+                  class="ui grey button circular">{{location.name}}</button>
         </div>
       </div>
       
@@ -37,6 +38,3 @@
   <!--    <p></p>-->
   <!--  </div>-->
 </ng-template>
-
-
-

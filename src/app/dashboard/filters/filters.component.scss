@@ -1,16 +1,15 @@
 .filters {
   min-height: 200px;
   padding-top: 40px;
-
-  button {
-    margin-right: 5px;
-  }
 }
 
 
 .filter-label {
+  margin-top: 8px;
+  margin-bottom: 8px;
   margin-left: 10px;
   font-weight: 600;
+  display: block;
 }
 
 
@@ -32,6 +31,6 @@
   display: flex;
 
   button {
-    margin-right: 6px;
+    margin-right: 10px;
   }
 }

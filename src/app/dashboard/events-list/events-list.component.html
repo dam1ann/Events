@@ -1,8 +1,8 @@
 <ng-container *ngIf="events.length; else noItems">
   <div class="ui container eventlist__list">
-    <div class="ui four stackable cards">
+    <div class="ui six doubling cards">
       <app-event *ngFor="let event of events"
-                 class="ui card"
+                 class="card"
                  [event]="event"
                  [routerLink]="['/event']"
                  [queryParams]="{title: event.title}">
@@ -11,7 +11,10 @@
   </div>
 </ng-container>
 <ng-template #noItems>
-  No items
+  <div class="ui basic segment center aligned">
+    <i class="frown outline icon"></i>
+    <span> No events</span>
+  </div>
 </ng-template>
 
 
