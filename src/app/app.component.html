@@ -1,0 +1,40 @@
+<app-login #loginModal></app-login>
+
+
+<div class="ui top attached compact menu">
+  <a class="item">
+    <a class="item" routerLink="/"><i class="home icon"></i> Home</a>
+  </a>
+  
+  <ng-container *ngIf="(user$ | async)?.uid; else notLoggedIn">
+    <div (click)="userSidebar.toggle()" class="right item user_name">
+      {{(user$ | async)?.displayName.split(' ')[0]}}
+      <i class="dropdown icon"></i>
+    </div>
+  </ng-container>
+  
+  <ng-template #notLoggedIn>
+    <div (click)="login()" class="right item">
+      <button class="ui button">SignIn</button>
+    </div>
+  </ng-template>
+</div>
+
+
+<sui-sidebar-container class="ui bottom attached segment">
+  <sui-sidebar #userSidebar
+               [direction]="'top'"
+               class="vertical">
+    <div (click)="userSidebar.toggle()" class="ui massive vertical fluid menu">
+      <a class="item" routerLink="/account"><i class="user icon"></i> Profile</a>
+      <a class="item" routerLink="/settings"><i class="settings icon"></i> Account Settings</a>
+      <a class="item" routerLink="/dashboard"><i class="grid layout icon"></i> Browse</a>
+      <a class="item" routerLink="/friends"><i class="grid layout icon"></i> Friends</a>
+      <a (click)="logout()" class="item"><i class="logout icon"></i> Logout</a>
+    </div>
+  </sui-sidebar>
+  
+  <sui-sidebar-sibling [isDimmedWhenVisible]="true">
+    <router-outlet></router-outlet>
+  </sui-sidebar-sibling>
+</sui-sidebar-container>
