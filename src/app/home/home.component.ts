@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FiltersService } from '../core/services';
+import { Observable } from 'rxjs';
+import { ICategory } from '../core/models';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +11,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {
+  categories$: Observable<Array<ICategory>>;
+
+  constructor(private filters: FiltersService) {
   }
 
   ngOnInit() {
+    this.categories$ = this.filters.categories;
   }
 
 }

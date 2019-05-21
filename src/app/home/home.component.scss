@@ -1,0 +1,20 @@
+.categories__container {
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    background: transparent;
+  }
+}
+
+.categories {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+}
+
+
+.card {
+  margin-right: 25px;
+}

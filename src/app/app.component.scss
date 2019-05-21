@@ -1,3 +1,11 @@
 .user_name {
   font-weight: 600;
 }
+
+.ui.top.attached.compact.menu {
+  border: 0;
+
+  .item::before {
+    display: none;
+  }
+}

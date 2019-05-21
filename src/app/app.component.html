@@ -1,10 +1,18 @@
 <app-login #loginModal></app-login>
 
-
 <div class="ui top attached compact menu">
-  <a class="item">
-    <a class="item" routerLink="/"><i class="home icon"></i> Home</a>
-  </a>
+  
+  <ng-container *ngIf="!homeRoute; else home">
+    <a class="item">
+      <a (click)="back()" class="item"><i class="arrow left large icon"></i></a>
+    </a>
+  </ng-container>
+  <ng-template #home>
+    <a class="item">
+      <a class="item" routerLink="/"><i class="home large icon"></i></a>
+    </a>
+  </ng-template>
+  
   
   <ng-container *ngIf="(user$ | async)?.uid; else notLoggedIn">
     <div (click)="userSidebar.toggle()" class="right item user_name">
