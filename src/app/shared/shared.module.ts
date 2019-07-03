@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
-import { EventComponent } from './components/event/event.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
 
 
 @NgModule({
   declarations: [
     NotfoundComponent,
     TruncatePipe,
-    EventComponent
+    EventCardComponent
   ],
 
   imports: [
@@ -20,7 +20,7 @@ import { EventComponent } from './components/event/event.component';
   exports: [
     TruncatePipe,
     NotfoundComponent,
-    EventComponent
+    EventCardComponent
   ]
 })
 export class SharedModule {

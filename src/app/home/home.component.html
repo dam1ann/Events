@@ -4,34 +4,13 @@
   
   <div class="ui hidden divider"></div>
   
-  <h3 class="header">Top categories</h3>
-  <div class="categories__container">
-    <div class="categories">
-      <div *ngFor="let category of categories$| async "
-           [ngClass]="category.color"
-           routerLink="/dashboard"
-           [ngStyle]=" {'filter': 'alpha(opacity=20)'}"
-           class="card">
-        <div class="content">
-          <div class="header">
-            <i [ngClass]="[category.color, category.icon]"
-               class="icon big"></i>
-          </div>
-          <div class="meta">{{category.name}}</div>
-          <!--          <div class="description"></div>-->
-        </div>
-      </div>
-    </div>
+  <div class="sectionTitle">
+    <h3 class="header">Top events</h3>
+    <a href="" class="seeMore">
+      <span>See more</span>
+      <i class="icon angle right large"></i>
+    </a>
   </div>
-  <a href="" class="seeMore">
-    <span>See more</span>
-    <i class="icon angle right large"></i>
-  </a>
-  
-  <div class="ui hidden divider"></div>
-  <div class="ui hidden divider"></div>
-  
-  <h3 class="header">Top events</h3>
   
   <ng-container *ngIf="(events$ | async) as events; else noItems">
     <div class="ui container eventlist__list">
@@ -52,12 +31,39 @@
     </div>
   </ng-template>
   
+  
+  <div class="ui hidden divider"></div>
   <div class="ui hidden divider"></div>
   
-  <a href="" class="seeMore">
-    <span>See more</span>
-    <i class="icon angle right large"></i>
-  </a>
+  
+  <div class="sectionTitle">
+    <h3 class="header">Top categories</h3>
+    <a href="" class="seeMore">
+      <span>See more</span>
+      <i class="icon angle right large"></i>
+    </a>
+  </div>
+  <div class="categories__container">
+    <div class="categories">
+      <div *ngFor="let category of categories$| async "
+           [ngClass]="category.color"
+           routerLink="/dashboard"
+           [ngStyle]=" {'filter': 'alpha(opacity=20)'}"
+           class="card">
+        <div class="content">
+          <div class="header">
+            <i [ngClass]="[category.color, category.icon]"
+               class="icon big"></i>
+          </div>
+          <div class="meta">{{category.name}}</div>
+          <!--          <div class="description"></div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="ui hidden divider"></div>
   
   <div class="ui hidden divider"></div>
   <div class="ui hidden divider"></div>

@@ -3,11 +3,11 @@ import { IEvent } from '../../../core/models';
 
 @Component({
   selector: 'app-event',
-  templateUrl: './event.component.html',
-  styleUrls: ['./event.component.scss'],
+  templateUrl: './event-card.component.html',
+  styleUrls: ['./event-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventComponent implements OnInit {
+export class EventCardComponent implements OnInit {
 
   @Input() event: IEvent;
 

@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { SuiModule } from 'ng2-semantic-ui';
 import { AccountModule } from './account/account.module';
 import { EventCreatorModule } from './event-creator/event-creator.module';
+import { CreateModule } from './create/create.module';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { EventCreatorModule } from './event-creator/event-creator.module';
     AppRoutingModule,
     SuiModule,
     AccountModule,
-    EventCreatorModule
+    EventCreatorModule,
+    CreateModule,
+    NgxSmartModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

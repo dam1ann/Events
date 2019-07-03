@@ -7,6 +7,7 @@ import { UserState } from './core/store/user/user.reducer';
 import { NavigationEnd, Router } from '@angular/router';
 import * as userActions from './core/store/user/user.actions';
 import { FiltersService } from './core/services';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit {
   constructor(private userStore: Store<UserState>,
               private router: Router,
               private filters: FiltersService,
-              private location: Location) {
+              private location: Location,
+              private ngxModalService: NgxSmartModalService) {
   }
 
   ngOnInit() {
@@ -50,6 +52,10 @@ export class AppComponent implements OnInit {
 
   back() {
     this.location.back();
+  }
+
+  openModal(name) {
+    this.ngxModalService.getModal(name).open();
   }
 
 
