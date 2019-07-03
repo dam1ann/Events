@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { IEvent } from '../../core/models';
+import { IEvent } from '../../../core/models';
 
 @Component({
   selector: 'app-event',

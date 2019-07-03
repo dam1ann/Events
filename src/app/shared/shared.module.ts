@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { EventComponent } from './components/event/event.component';
 
 
 @NgModule({
   declarations: [
     NotfoundComponent,
-    TruncatePipe
+    TruncatePipe,
+    EventComponent
   ],
 
   imports: [
@@ -17,7 +19,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
   ],
   exports: [
     TruncatePipe,
-    NotfoundComponent
+    NotfoundComponent,
+    EventComponent
   ]
 })
 export class SharedModule {

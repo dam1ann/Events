@@ -6,7 +6,8 @@
     <div class="categories">
       <div *ngFor="let category of categories$| async "
            [ngClass]="category.color"
-           [ngStyle]=" {'filter': 'alpha(opacity=30)'}"
+           routerLink="/dashboard"
+           [ngStyle]=" {'filter': 'alpha(opacity=20)'}"
            class="card">
         <div class="content">
           <div class="header">
@@ -19,9 +20,31 @@
       </div>
     </div>
   </div>
+  <div class="ui hidden divider"></div>
   
   <h1 class="header">Top events</h1>
   
+  <ng-container *ngIf="(events$ | async) as events; else noItems">
+    <div class="ui container eventlist__list">
+      <div class="ui six doubling cards">
+        <app-event *ngFor="let event of events"
+                   class="card"
+                   [event]="event"
+                   [routerLink]="['/event']"
+                   [queryParams]="{title: event.title}">
+        </app-event>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noItems>
+    <div class="ui basic segment center aligned">
+      <i class="frown outline icon"></i>
+      <span> No events</span>
+    </div>
+  </ng-template>
+  
+  
+  <div class="ui hidden divider"></div>
   <h2 class="header">Most popular paid events</h2>
 
 </div>

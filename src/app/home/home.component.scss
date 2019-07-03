@@ -17,4 +17,19 @@
 
 .card {
   margin-right: 25px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.content {
+  padding: 50px 28px;
+
+  .header {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+h2 {
+  font-weight: 700;
 }

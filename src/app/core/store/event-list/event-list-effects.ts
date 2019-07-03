@@ -20,6 +20,7 @@ export class EventListEffects {
     delay(300),
     catchError(err => of(new FetchError({error: err.message})))
   );
+
   @Effect()
   filterEvents: Observable<Action> = this.actions.pipe(
     ofType(FILTER_EVENTS),

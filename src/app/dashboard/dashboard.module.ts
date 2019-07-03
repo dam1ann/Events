@@ -7,7 +7,6 @@ import { SuiModule } from 'ng2-semantic-ui';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { EventsListComponent } from './events-list/events-list.component';
-import { EventComponent } from './event/event.component';
 import { FiltersComponent } from './filters/filters.component';
 import { listReducer } from '../core/store/event-list/event-list.reducer';
 import { EventListEffects } from '../core/store/event-list/event-list-effects';
@@ -17,8 +16,7 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     DashboardComponent,
     EventsListComponent,
-    EventComponent,
-    FiltersComponent
+    FiltersComponent,
   ],
   imports: [
     CommonModule,
