@@ -1,3 +1,7 @@
+<div class="ui container">
+  <h1>Browse</h1>
+</div>
+
 <app-filters [locations]="locations$ | async"
              [categories]="categories$ | async"
              (filter)="onFilter($event)"></app-filters>

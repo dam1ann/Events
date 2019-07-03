@@ -55,7 +55,7 @@ body {
 .card {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1) !important;
   border: none !important;
-  border-radius: 10px !important;
+  border-radius: 16px !important;
 }
 
 .card:hover {
@@ -64,43 +64,47 @@ body {
 }
 
 
-h1 {
-  margin-top: 30px !important;
-  margin-bottom: 30px !important;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif !important;
+  color: rgba(0, 0, 0, .7) !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: rgba(0,0,0,.7) !important;
+h1{
+  font-weight: 700;
 }
 
 
 .card.red {
-  background-color: rgba(219, 40, 40, .2) !important;
+  background-color: rgba(219, 40, 40, .12) !important;
 }
 
 .card.orange {
-  background-color: rgba(243, 114, 28, .2) !important;
+  background-color: rgba(243, 114, 28, .12) !important;
 }
 
 .card.yellow {
-  background-color: rgba(251, 189, 8, .2) !important;
+  background-color: rgba(251, 189, 8, .12) !important;
 }
 
 .card.violet {
-  background-color: rgba(100, 53, 201, .2) !important;
+  background-color: rgba(100, 53, 201, .12) !important;
 }
 
 .card.olive {
-  background-color: rgba(181, 204, 24, .2) !important;
+  background-color: rgba(181, 204, 24, .12) !important;
 }
 
 .card.green {
-  background-color: rgba(33, 186, 69, .2) !important;
+  background-color: rgba(33, 186, 69, .12) !important;
 }
 
+.card.purple{
+  background-color: rgba(163, 51, 200, .12) !important;
+}
 
-
-
+.card.blue{
+  background-color: rgba(33, 133, 208, .12) !important;
+}
 
 
 

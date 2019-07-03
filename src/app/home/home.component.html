@@ -1,7 +1,10 @@
 <div class="ui container">
+  
+  <h1>Events</h1>
+  
   <div class="ui hidden divider"></div>
   
-  <h2 class="header">Top categories</h2>
+  <h3 class="header">Top categories</h3>
   <div class="categories__container">
     <div class="categories">
       <div *ngFor="let category of categories$| async "
@@ -12,7 +15,7 @@
         <div class="content">
           <div class="header">
             <i [ngClass]="[category.color, category.icon]"
-               class="icon large"></i>
+               class="icon big"></i>
           </div>
           <div class="meta">{{category.name}}</div>
           <!--          <div class="description"></div>-->
@@ -20,9 +23,15 @@
       </div>
     </div>
   </div>
+  <a href="" class="seeMore">
+    <span>See more</span>
+    <i class="icon angle right large"></i>
+  </a>
+  
+  <div class="ui hidden divider"></div>
   <div class="ui hidden divider"></div>
   
-  <h1 class="header">Top events</h1>
+  <h3 class="header">Top events</h3>
   
   <ng-container *ngIf="(events$ | async) as events; else noItems">
     <div class="ui container eventlist__list">
@@ -43,9 +52,22 @@
     </div>
   </ng-template>
   
+  <div class="ui hidden divider"></div>
+  
+  <a href="" class="seeMore">
+    <span>See more</span>
+    <i class="icon angle right large"></i>
+  </a>
   
   <div class="ui hidden divider"></div>
-  <h2 class="header">Most popular paid events</h2>
+  <div class="ui hidden divider"></div>
+  
+  <h3 class="header">Most popular paid events</h3>
+  
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
 
 </div>
 
