@@ -23,8 +23,7 @@ export class AppComponent implements OnInit {
   constructor(private userStore: Store<UserState>,
               private router: Router,
               private filters: FiltersService,
-              private location: Location,
-              private ngxModalService: NgxSmartModalService) {
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -34,7 +33,7 @@ export class AppComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        console.log(event);
+        // console.log(event);
         const {url} = event;
 
         this.homeRoute = (url === '/');
@@ -52,14 +51,5 @@ export class AppComponent implements OnInit {
 
   back() {
     this.location.back();
-  }
-
-  openModal(name) {
-    this.ngxModalService.getModal(name).open();
-  }
-
-
-  async goToModal() {
-    await this.router.navigate([`${this.router.url}/create`]);
   }
 }

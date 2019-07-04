@@ -1,11 +1,6 @@
 <app-login #loginModal></app-login>
 
-<ngx-smart-modal #myModal identifier="myModal">
-  <h1>Title</h1>
-  <p>Some stuff...</p>
-  
-  <button (click)="myModal.close()">Close</button>
-</ngx-smart-modal>
+<app-create #create></app-create>
 
 
 <div class="ui top attached compact menu">
@@ -42,7 +37,7 @@
                [direction]="'top'"
                class="vertical">
     <div (click)="userSidebar.toggle()" class="ui massive vertical fluid menu">
-      <a class="item" (click)="openModal('myModal')"><i class="user add"></i> Add event</a>
+      <a class="item" (click)="create.open()"><i class="user add"></i> Add event</a>
       <a class="item" routerLink="/account"><i class="user icon"></i> Profile</a>
       <a class="item" routerLink="/settings"><i class="settings icon"></i> Account Settings</a>
       <a class="item" routerLink="/dashboard"><i class="grid layout icon"></i> Browse</a>

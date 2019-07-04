@@ -35,7 +35,10 @@ import { creatorReducer } from '../core/store/event-creator/event-creator.reduce
     ReactiveFormsModule
   ],
   exports: [
-    EventCreatorComponent
+    EventCreatorComponent,
+    FirstStepComponent,
+    SecondStepComponent,
+    ThirdStepComponent
   ]
 })
 export class EventCreatorModule {

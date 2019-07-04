@@ -1,3 +1,10 @@
-<p>
-  create works!
-</p>
+<ngx-smart-modal #createEvent identifier='{{modalIdentifier}}'>
+  
+  <h1>Add new event</h1>
+  
+  <app-first-step></app-first-step>
+  <app-second-step></app-second-step>
+  <app-third-step></app-third-step>
+  
+  <button (click)="createEvent.close()">Close</button>
+</ngx-smart-modal>
