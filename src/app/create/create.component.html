@@ -1,10 +1,11 @@
-<ngx-smart-modal #createEvent identifier='{{modalIdentifier}}'>
+<ngx-smart-modal identifier='{{modalIdentifier}}'>
   
-  <h1>Add new event</h1>
+  <h2>Add new event</h2>
+  <ng-container [ngSwitch]="(step$ | async)">
+    <app-first-step *ngSwitchCase="'first'"></app-first-step>
+    <app-second-step *ngSwitchCase="'second'"></app-second-step>
+    <app-third-step *ngSwitchCase="'third'"></app-third-step>
+  </ng-container>
   
-  <app-first-step></app-first-step>
-  <app-second-step></app-second-step>
-  <app-third-step></app-third-step>
-  
-  <button (click)="createEvent.close()">Close</button>
+  <button class="ui button" (click)="close()">Close</button>
 </ngx-smart-modal>

@@ -20,16 +20,6 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) !important;
 }
 
-.content {
-  padding: 50px 28px;
-
-  .header {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 5px;
-  }
-}
-
 
 h2 {
   font-weight: 700;
@@ -42,13 +32,43 @@ h2 {
 }
 
 
-.seeMore{
+.seeMore {
   display: flex;
   justify-content: flex-end;
 }
 
 
-.sectionTitle{
+.sectionTitle {
   display: flex;
   justify-content: space-between;
+}
+
+
+.topEvents {
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    background: transparent;
+  }
+
+  .card {
+    min-width: 120px;
+  }
+
+  .card:last-of-type {
+    margin-right: 120px;
+  }
+}
+
+.content {
+  padding: 50px 28px;
+
+
+  .header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
 }

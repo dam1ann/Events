@@ -1,14 +1,9 @@
 <ng-container *ngIf="event">
   <div class="content">
-    <!--    <div class="header">{{event.title | truncate:[20] }}</div>-->
-    <!--    <div class="meta">-->
-    <!--      <span class="category">{{event.venue}}</span>-->
-    <!--    </div>-->
     <div class="description">
       <img src="../../assets/images/paragraph.png" class="ui wireframe image" alt="">
       <h5>{{event.title | truncate:[16] }}</h5>
       <span class="category">{{event.venue}}</span>
-    
     </div>
   </div>
   <div class="extra content">

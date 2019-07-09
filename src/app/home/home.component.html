@@ -13,15 +13,13 @@
   </div>
   
   <ng-container *ngIf="(events$ | async) as events; else noItems">
-    <div class="ui container eventlist__list">
-      <div class="ui six doubling cards">
-        <app-event *ngFor="let event of events"
-                   class="card"
-                   [event]="event"
-                   [routerLink]="['/event']"
-                   [queryParams]="{title: event.title}">
-        </app-event>
-      </div>
+    <div class="ui six doubling cards topEvents">
+      <app-event *ngFor="let event of events"
+                 class="card"
+                 [event]="event"
+                 [routerLink]="['/event']"
+                 [queryParams]="{title: event.title}">
+      </app-event>
     </div>
   </ng-container>
   <ng-template #noItems>
@@ -32,6 +30,7 @@
   </ng-template>
   
   
+  <div class="ui hidden divider"></div>
   <div class="ui hidden divider"></div>
   <div class="ui hidden divider"></div>
   

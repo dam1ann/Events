@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { FiltersService } from '../core/services';
 import { Observable } from 'rxjs';
 import { ICategory, IEvent } from '../core/models';
-import { ListState } from '../core/store/event-list/event-list.reducer';
+import { ListState } from '../core/store/list/event-list.reducer';
 import { Store } from '@ngrx/store';
-import * as listActions from '../core/store/event-list/event-list.actions';
+import * as listActions from '../core/store/list/event-list.actions';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.categories$ = this.filters.categories;
 
-    this.loading$ = this.store.select('listState', 'loading');
-    this.events$ = this.store.select('listState', 'list').pipe(tap(data => {
+    this.loading$ = this.store.select('list', 'loading');
+    this.events$ = this.store.select('list', 'data').pipe(tap(data => {
       console.log(data);
     }));
 

@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
-import { CreatorState } from '../../core/store/event-creator/event-creator.reducer';
+import * as eventCreatorActions from '../../core/store/creator/creator.actions';
+import { CreatorState } from '../../core/store/creator/creator.reducer';
 import { FiltersService } from '../../core/services/filters.service';
 import { ILocation } from '../../core/models/location.interface';
 
@@ -66,6 +66,6 @@ export class SecondStepComponent implements OnInit {
   }
 
   onBack() {
-    this.browserLocation.back();
+    console.log('go back');
   }
 }

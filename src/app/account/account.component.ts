@@ -21,7 +21,7 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user$ = this.userStore.select('user');
+    this.user$ = this.userStore.select('user', 'data');
   }
 
 }

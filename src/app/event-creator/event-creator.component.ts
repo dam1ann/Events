@@ -4,8 +4,8 @@ import { ActiveModal } from 'ng2-semantic-ui/dist';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { CreatorState } from '../core/store/event-creator/event-creator.reducer';
-import * as eventCreatorActions from '../core/store/event-creator/event-creator.actions';
+import { CreatorState } from '../core/store/creator/creator.reducer';
+import * as eventCreatorActions from '../core/store/creator/creator.actions';
 
 interface IContext {
   data: string;

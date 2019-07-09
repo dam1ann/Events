@@ -5,13 +5,7 @@ import { DashboardComponent } from './dashboard.component';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
-    children: [
-      {
-        path: 'create',
-        loadChildren: './../event-creator/event-creator.module#EventCreatorModule'
-      }
-    ]
+    component: DashboardComponent
   }];
 
 @NgModule({

@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
-import { CreatorState } from '../../core/store/event-creator/event-creator.reducer';
-import { FiltersService } from '../../core/services/filters.service';
-import { ICategory } from '../../core/models/category.interface';
+import { CreatorState } from '../../core/store/creator/creator.reducer';
+import { FiltersService } from '../../core/services';
+import { ICategory } from '../../core/models';
 
 
 @Component({
@@ -16,6 +15,9 @@ import { ICategory } from '../../core/models/category.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FirstStepComponent implements OnInit, OnDestroy {
+
+  @Output()
+  next = new EventEmitter();
 
   categories$: Observable<Array<ICategory>>;
   selectedCategories: Array<ICategory>;
@@ -80,10 +82,13 @@ export class FirstStepComponent implements OnInit, OnDestroy {
    * Check category name exist in database before go next
    */
   onNext() {
-    this.store.dispatch(new eventCreatorActions.CheckName({
-      title: this.name.value || '',
-      category: this.selectedCategories.map(cat => cat.name)[0] || {},
-      categories: this.selectedCategories.map(cat => cat.name) || []
-    }));
+    this.next.emit({
+      type: 'firstStep',
+      data: {
+        title: this.name.value || '',
+        category: this.selectedCategories.map(cat => cat.name)[0] || {},
+        categories: this.selectedCategories.map(cat => cat.name) || []
+      }
+    });
   }
 }

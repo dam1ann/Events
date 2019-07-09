@@ -5,13 +5,7 @@ import {SettingsComponent} from './settings.component';
 const routes: Routes = [
     {
         path: '',
-        component: SettingsComponent,
-        children: [
-            {
-                path: 'create',
-                loadChildren: './../event-creator/event-creator.module#EventCreatorModule'
-            }
-        ]
+        component: SettingsComponent
     }];
 
 @NgModule({

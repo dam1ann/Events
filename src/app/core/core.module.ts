@@ -3,9 +3,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -25,17 +24,17 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    StoreDevtoolsModule.instrument({
-      maxAge: 25
-    }),
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([UserEffects]),
-
+    EffectsModule.forRoot([UserEffects])
   ],
   providers: [
     NavigationService,
     EventsService,
-    FiltersService
+    FiltersService,
+    {
+      provide: FirestoreSettingsToken,
+      useValue: {}
+    }
   ]
 })
 export class CoreModule {

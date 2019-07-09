@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user$ = this.userStore.select('userState', 'user');
+    this.user$ = this.userStore.select('user', 'data');
     this.userStore.dispatch(new userActions.GetUser());
     this.homeRoute = false;
 

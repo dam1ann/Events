@@ -15,13 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'events',
-        component: EventsComponent,
-        children: [
-          {
-            path: 'create',
-            loadChildren: './../event-creator/event-creator.module#EventCreatorModule'
-          }
-        ]
+        component: EventsComponent
       }
     ]
   }];

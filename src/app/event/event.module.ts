@@ -4,9 +4,9 @@ import { EventComponent } from './event.component';
 import { EventRoutingModule } from './event-routing.module';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
-import { singleEventReducer } from '../core/store/single-event/single-event.reducer';
+import { singleEventReducer } from '../core/store/event/single-event.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { SingleEventsEffects } from '../core/store/single-event/single-events.efffects';
+import { SingleEventsEffects } from '../core/store/event/single-events.efffects';
 import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { AgmCoreModule } from '@agm/core';
     CommonModule,
     RouterModule,
     EventRoutingModule,
-    StoreModule.forFeature('singleEventState', singleEventReducer),
+    StoreModule.forFeature('event', singleEventReducer),
     EffectsModule.forFeature([SingleEventsEffects]),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDAopkC8WFvI3UD0z-nyQmdVoZ81QVGJlk'

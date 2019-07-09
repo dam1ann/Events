@@ -8,8 +8,8 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { EventsListComponent } from './events-list/events-list.component';
 import { FiltersComponent } from './filters/filters.component';
-import { listReducer } from '../core/store/event-list/event-list.reducer';
-import { EventListEffects } from '../core/store/event-list/event-list-effects';
+import { listReducer } from '../core/store/list/event-list.reducer';
+import { EventListEffects } from '../core/store/list/event-list-effects';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     DashboardRoutingModule,
     SuiModule,
-    StoreModule.forFeature('listState', listReducer),
+    StoreModule.forFeature('list', listReducer),
     EffectsModule.forFeature([EventListEffects]),
     SharedModule
   ]

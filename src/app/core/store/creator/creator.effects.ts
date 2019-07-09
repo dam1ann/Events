@@ -1,4 +1,4 @@
-import * as eventCreatorActions from './event-creator.actions';
+import * as eventCreatorActions from './creator.actions';
 import {
   CHECK_MORE_INFO,
   CHECK_NAME,
@@ -9,14 +9,14 @@ import {
   HttpError,
   NameValid,
   SecondStepSuccess
-} from './event-creator.actions';
+} from './creator.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { CreatorState } from './event-creator.reducer';
+import { CreatorState } from './creator.reducer';
 import { EventsService, NavigationService } from '../../services';
 import { IEvent } from '../../models';
 import { tap } from 'rxjs/internal/operators/tap';
@@ -24,7 +24,7 @@ import { tap } from 'rxjs/internal/operators/tap';
 export type Action = eventCreatorActions.All;
 
 @Injectable()
-export class EventCreatorEffects {
+export class CreatorEffects {
 
   constructor(private actions: Actions,
               private store: Store<CreatorState>,

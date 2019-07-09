@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { CreatorState } from '../core/store/event-creator/event-creator.reducer';
+import { CreatorState } from '../core/store/creator/creator.reducer';
 import { Store } from '@ngrx/store';
+import * as creatorActions from '../core/store/creator/creator.actions';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -11,25 +13,29 @@ import { tap } from 'rxjs/operators';
 })
 export class CreateComponent implements OnInit {
 
+  loading$: Observable<boolean>;
+  step$: Observable<string>;
   modalIdentifier: string;
-  state;
 
   constructor(private ngxSmartModalService: NgxSmartModalService,
               private store: Store<CreatorState>) {
   }
 
   ngOnInit() {
-    this.modalIdentifier = 'createEvent';
-    this.state = this.store.select('creatorState').pipe(tap(data => {
+    this.modalIdentifier = 'create-event';
+    this.loading$ = this.store.select('create', 'loading');
+    this.step$ = this.store.select('create', 'step').pipe(tap(data => {
       console.log(data);
     }));
   }
 
-  open(name: string) {
+  open() {
     this.ngxSmartModalService.getModal(this.modalIdentifier).open();
   }
 
-  close(name: string) {
-  }
 
+  close() {
+    this.store.dispatch(new creatorActions.ClearState());
+    this.ngxSmartModalService.getModal(this.modalIdentifier).close();
+  }
 }

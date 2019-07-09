@@ -4,12 +4,12 @@ import * as userActions from './user.actions';
 export type Action = userActions.All;
 
 export interface UserState {
-  user: IUser;
+  data: IUser;
   loading: boolean;
 }
 
 const defaultUserState = {
-  user: new User(null, 'Guest'),
+  data: new User(null, 'Guest'),
   loading: false
 };
 
@@ -22,8 +22,8 @@ export function userReducer(userState = defaultUserState, action: Action): UserS
     case userActions.AUTHENTICATED:
       return {
         ...userState,
-        user: <IUser>{
-          ...userState.user,
+        data: <IUser>{
+          ...userState.data,
           ...action.payload
         },
         loading: false
@@ -31,7 +31,7 @@ export function userReducer(userState = defaultUserState, action: Action): UserS
 
     case userActions.NOT_AUTHENTICATED:
       return {
-        user: defaultUserState.user,
+        data: defaultUserState.data,
         loading: false
       };
 
@@ -44,8 +44,8 @@ export function userReducer(userState = defaultUserState, action: Action): UserS
     case userActions.AUTH_ERROR:
       return {
         ...userState,
-        user: <IUser>{
-          ...userState.user,
+        data: <IUser>{
+          ...userState.data,
           ...action.payload
         },
         loading: false

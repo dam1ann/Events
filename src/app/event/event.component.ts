@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
-import { SingleEventState } from '../core/store/single-event/single-event.reducer';
-import * as singleEventActions from '../core/store/single-event/single-event.actions';
+import { SingleEventState } from '../core/store/event/single-event.reducer';
+import * as singleEventActions from '../core/store/event/single-event.actions';
 import { IEvent } from '../core/models';
 
 @Component({
@@ -29,7 +29,7 @@ export class EventComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.queryParams.subscribe(({title}) => {
       this.titleService.setTitle(`Events - ${title}`);
-      this.event$ = this.store.select('singleEventState', 'event');
+      this.event$ = this.store.select('event', 'data');
       this.store.dispatch(new singleEventActions.GetEvent(title));
     });
   }

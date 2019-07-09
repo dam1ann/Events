@@ -1,18 +1,20 @@
-import * as EventCreatorActions from '../event-creator/event-creator.actions';
+import * as EventCreatorActions from './creator.actions';
 import { IEvent } from '../../models';
 
 export type Action = EventCreatorActions.All;
 
 export interface CreatorState {
-  event: IEvent;
+  data: IEvent;
   loading: boolean;
   finished: boolean;
+  step: string;
 }
 
 const defaultCreatorState = {
-  event: <IEvent>{},
+  data: <IEvent>{},
   loading: false,
-  finished: false
+  finished: false,
+  step: 'first'
 };
 
 
@@ -22,8 +24,8 @@ export function creatorReducer(eventState = defaultCreatorState, action: Action)
     case EventCreatorActions.CHECK_NAME:
       return {
         ...eventState,
-        event: <IEvent>{
-          ...eventState.event,
+        data: <IEvent>{
+          ...eventState.data,
           ...action.payload,
         },
         loading: true
@@ -32,14 +34,15 @@ export function creatorReducer(eventState = defaultCreatorState, action: Action)
     case EventCreatorActions.NAME_VALID:
       return {
         ...eventState,
-        loading: false
+        loading: false,
+        step: 'second'
       };
 
     case EventCreatorActions.CHECK_MORE_INFO:
       return {
         ...eventState,
-        event: <IEvent>{
-          ...eventState.event,
+        data : <IEvent>{
+          ...eventState.data,
           ...action.payload,
         }, loading: true
       };
@@ -47,7 +50,8 @@ export function creatorReducer(eventState = defaultCreatorState, action: Action)
     case EventCreatorActions.SECOND_STEP_SUCCESS:
       return {
         ...eventState,
-        loading: false
+        loading: false,
+        step: 'third'
       };
 
     case EventCreatorActions.CREATE_EVENT:
@@ -64,10 +68,13 @@ export function creatorReducer(eventState = defaultCreatorState, action: Action)
       };
 
     case EventCreatorActions.HTTP_ERROR:
-      return defaultCreatorState;
+      return eventState;
 
     case EventCreatorActions.CLEAR_STATE:
-      return defaultCreatorState;
+      return {
+        ...defaultCreatorState,
+        step: 'first'
+      };
 
     default: {
       return eventState;

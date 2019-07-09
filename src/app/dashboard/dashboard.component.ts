@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import * as listActions from '../core/store/event-list/event-list.actions';
-import { ListState } from '../core/store/event-list/event-list.reducer';
+import * as listActions from '../core/store/list/event-list.actions';
+import { ListState } from '../core/store/list/event-list.reducer';
 import { ICategory, IEvent, ILocation } from '../core/models';
 import { FiltersService } from '../core/services';
 
@@ -28,8 +28,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.locations$ = this.filters.locations;
     this.categories$ = this.filters.categories;
 
-    this.events$ = this.store.select('listState', 'list');
-    this.loading$ = this.store.select('listState', 'loading');
+    this.events$ = this.store.select('list', 'data');
+    this.loading$ = this.store.select('list', 'loading');
     this.store.dispatch(new listActions.GetEvents());
   }
 

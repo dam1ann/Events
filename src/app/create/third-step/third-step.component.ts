@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import * as eventCreatorActions from '../../core/store/event-creator/event-creator.actions';
-import { CreatorState } from '../../core/store/event-creator/event-creator.reducer';
+import * as eventCreatorActions from '../../core/store/creator/creator.actions';
+import { CreatorState } from '../../core/store/creator/creator.reducer';
 
 
 @Component({

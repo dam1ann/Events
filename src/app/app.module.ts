@@ -10,8 +10,8 @@ import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
 import { SuiModule } from 'ng2-semantic-ui';
 import { AccountModule } from './account/account.module';
-import { EventCreatorModule } from './event-creator/event-creator.module';
 import { CreateModule } from './create/create.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -24,12 +24,12 @@ import { CreateModule } from './create/create.module';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    CoreModule.forRoot(),
     AppRoutingModule,
     SuiModule,
     AccountModule,
-    EventCreatorModule,
-    CreateModule
+    CoreModule.forRoot(),
+    CreateModule,
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent]

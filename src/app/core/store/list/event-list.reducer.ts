@@ -4,12 +4,12 @@ import { IEvent } from '../../models';
 export type Action = eventListActions.All;
 
 export interface ListState {
-  list: Array<IEvent>;
+  data: Array<IEvent>;
   loading: boolean;
 }
 
 const defaultListState: ListState = {
-  list: [],
+  data: [],
   loading: false
 };
 
@@ -25,21 +25,21 @@ export function listReducer(listState = defaultListState, action: Action): ListS
     case eventListActions.FETCH_SUCCESS:
       return <ListState>{
         ...listState,
-        list: <Array<IEvent>>action.payload,
+        data: <Array<IEvent>>action.payload,
         loading: false
       };
 
     case eventListActions.FETCH_ERROR:
       return <ListState>{
         ...listState,
-        list: <Array<IEvent>>[],
+        data: <Array<IEvent>>[],
         loading: false
       };
 
     case eventListActions.FILTER_EVENTS:
       return <ListState>{
         ...listState,
-        list: <Array<IEvent>>[],
+        data: <Array<IEvent>>[],
         loading: true
       };
 
