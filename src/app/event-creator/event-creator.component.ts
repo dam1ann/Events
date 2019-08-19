@@ -19,7 +19,7 @@ interface IContext {
 })
 export class EventCreatorComponent implements OnInit, OnDestroy {
 
-  @ViewChild('modalTemplate')
+  @ViewChild('modalTemplate', { static: true })
   private modalTemplate: ModalTemplate<IContext, string, string>;
   private modal: ActiveModal<any, any, any>;
 

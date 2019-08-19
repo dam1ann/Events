@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   user$: Observable<User>;
 
-  @ViewChild('modalTemplate')
+  @ViewChild('modalTemplate', { static: true })
   private modalTemplate: ModalTemplate<IContext, string, string>;
   private modal: ActiveModal<any, any, any>;
 
