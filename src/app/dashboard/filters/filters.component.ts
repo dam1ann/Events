@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICategory, ILocation } from '../../core/models';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,12 +18,19 @@ export class FiltersComponent implements OnInit {
   private _selectedLocations: Array<any>;
   private _selectedCategories: Array<any>;
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this._selectedCategories = [];
     this._selectedLocations = [];
+
+    this.route.queryParams.subscribe(params => {
+      const {category} = params;
+
+      console.log(params);
+      this.onCategoryClick(category);
+    });
   }
 
 

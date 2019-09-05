@@ -47,6 +47,7 @@
       <div *ngFor="let category of categories$| async "
            [ngClass]="category.color"
            routerLink="/dashboard"
+           [queryParams]="{ 'category' : category.name}"
            [ngStyle]=" {'filter': 'alpha(opacity=20)'}"
            class="card">
         <div class="content">
@@ -55,7 +56,6 @@
                class="icon big"></i>
           </div>
           <div class="meta">{{category.name}}</div>
-          <!--          <div class="description"></div>-->
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import * as listActions from '../core/store/list/event-list.actions';
 import { ListState } from '../core/store/list/event-list.reducer';
 import { ICategory, IEvent, ILocation } from '../core/models';
 import { FiltersService } from '../core/services';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   loading$: Observable<Boolean>;
 
   constructor(private store: Store<ListState>,
-              private filters: FiltersService) {
+              private filters: FiltersService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
