@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, EventEmitter, Component, Input, Output, OnInit } from '@angular/core';
 import { ICategory, ILocation } from '../../core/models';
 import { ActivatedRoute } from '@angular/router';
 
