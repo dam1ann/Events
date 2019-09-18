@@ -9,37 +9,38 @@ import { FiltersService } from '../core/services';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  events$: Observable<Array<IEvent>>;
-  locations$: Observable<Array<ILocation>>;
-  categories$: Observable<Array<ICategory>>;
-  loading$: Observable<Boolean>;
+    events$: Observable<Array<IEvent>>;
+    locations$: Observable<Array<ILocation>>;
+    categories$: Observable<Array<ICategory>>;
+    loading$: Observable<Boolean>;
 
-  constructor(private store: Store<ListState>,
-              private filters: FiltersService,
-              private route: ActivatedRoute) {
-  }
+    constructor(private store: Store<ListState>,
+                private filters: FiltersService,
+                private route: ActivatedRoute) {
+    }
 
-  ngOnInit() {
-    this.locations$ = this.filters.locations;
-    this.categories$ = this.filters.categories;
+    ngOnInit() {
+        this.locations$ = this.filters.locations;
+        this.categories$ = this.filters.categories;
 
-    this.events$ = this.store.select('list', 'data');
-    this.loading$ = this.store.select('list', 'loading');
-    this.store.dispatch(new listActions.GetEvents());
-  }
+        this.events$ = this.store.select('list', 'data');
+        this.loading$ = this.store.select('list', 'loading');
+        this.store.dispatch(new listActions.GetEvents());
+    }
 
-  ngOnDestroy() {
-    this.store.dispatch(new listActions.ClearState());
-  }
+    ngOnDestroy() {
 
-  onFilter(filters) {
-    this.store.dispatch(new listActions.FilterEevnts(filters));
-  }
+        this.store.dispatch(new listActions.ClearState());
+    }
+
+    onFilter(filters) {
+        this.store.dispatch(new listActions.FilterEevnts(filters));
+    }
 }

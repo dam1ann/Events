@@ -13,19 +13,19 @@ import { EventListEffects } from '../core/store/list/event-list-effects';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    EventsListComponent,
-    FiltersComponent,
-  ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule,
-    SuiModule,
-    StoreModule.forFeature('list', listReducer),
-    EffectsModule.forFeature([EventListEffects]),
-    SharedModule
-  ]
+    declarations: [
+        DashboardComponent,
+        EventsListComponent,
+        FiltersComponent,
+    ],
+    imports: [
+        CommonModule,
+        DashboardRoutingModule,
+        SuiModule,
+        StoreModule.forFeature('list', listReducer),
+        EffectsModule.forFeature([EventListEffects]),
+        SharedModule
+    ]
 })
 export class DashboardModule {
 }
