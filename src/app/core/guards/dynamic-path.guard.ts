@@ -20,6 +20,7 @@ export function parseUrlPathInSegments(fullUrl: string): Array<string> {
         });
 }
 
+const test = 'test';
 
 @Injectable()
 export class DynamicPathGuard implements CanActivate {
