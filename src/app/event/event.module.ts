@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { SingleEventsEffects } from '../core/store/event/single-events.efffects';
 import { AgmCoreModule } from '@agm/core';
 
+
 @NgModule({
   declarations: [EventComponent],
   imports: [

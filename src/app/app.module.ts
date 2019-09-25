@@ -13,6 +13,31 @@ import { AccountModule } from './account/account.module';
 import { CreateModule } from './create/create.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+
+class Utils {
+
+    static double(num: number): number {
+
+    }
+}
+
+
+class Person {
+    name;
+
+    constructor(name) {
+        this.name = name;
+    }
+
+    double(): Number {
+        return;
+    }
+
+    toString() {
+        return String(this.name);
+    }
+}
+
 @NgModule({
   declarations: [
     AppComponent
@@ -35,4 +60,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+    static PI;
+
+
 }
