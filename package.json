@@ -62,6 +62,6 @@
     "ts-node": "~8.0.3",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3",
-    "semantic-ui": "^2.4.2"
+    "semantic-ui": "^2.5.0"
   }
 }
